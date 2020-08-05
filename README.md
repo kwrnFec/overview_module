@@ -1,6 +1,6 @@
 # Project Name
 
-> Project description
+> Product detail
 
 ## Related Projects
 
