@@ -7,7 +7,10 @@ class App extends Component {
   }
 
   render() {
-    return <div>Hello World</div>;
+    return (
+      <div>Hello Smarmy World</div>
+
+    );
   }
 }
 

@@ -21,6 +21,7 @@
     "express": "^4.17.1",
     "jest": "^26.2.2",
     "jest-enzyme": "^7.1.2",
+    "mongoose": "^5.9.27",
     "parser": "^0.1.4",
     "path": "^0.12.7",
     "prop-types": "^15.7.2",
