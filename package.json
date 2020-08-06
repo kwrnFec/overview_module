@@ -10,7 +10,7 @@
   "scripts": {
     "start": "nodemon server/index.js",
     "react-dev": "webpack -d --watch",
-    "test": "jest"
+    "test": "jest --coverage"
   },
   "dependencies": {
     "axios": "^0.19.2",
@@ -20,7 +20,6 @@
     "enzyme-adapter-react-16": "^1.15.2",
     "express": "^4.17.1",
     "jest": "^26.2.2",
-    "jest-enzyme": "^7.1.2",
     "mongoose": "^5.9.27",
     "parser": "^0.1.4",
     "path": "^0.12.7",
@@ -53,13 +52,6 @@
     ],
     "setupFiles": [
       "./src/setupTests.js"
-    ],
-    "setupFilesAfterEnv": [
-      "jest-enzyme"
-    ],
-    "testEnvironment": "enzyme",
-    "testEnvironmentOptions": {
-      "enzymeAdapter": "react16"
-    }
+    ]
   }
 }

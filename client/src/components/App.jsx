@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Navibar from './Logo-And-Searchbar/Navibar.jsx';
 
 class App extends Component {
   constructor(props) {
@@ -8,8 +12,11 @@ class App extends Component {
 
   render() {
     return (
-      <div>Hello Smarmy World</div>
-
+      <Container fluid>
+        <Row>
+          <Col><Navibar /></Col>
+        </Row>
+      </Container>
     );
   }
 }
