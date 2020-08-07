@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import { Container } from 'react-bootstrap';
 import Navibar from './Logo-And-Searchbar/Navibar.jsx';
+import Stars from './Product-Information/Stars.jsx';
 
 class App extends Component {
   constructor(props) {
@@ -24,7 +25,7 @@ class App extends Component {
           <Container className="image-gallery">Image-gallery</Container>
           <Container>
             <Container className="product-information">
-              Product information
+              <Stars />
             </Container>
             <Container className="style-selector">Style selector</Container>
             <Container className="add-to-cart">Add to Cart</Container>
