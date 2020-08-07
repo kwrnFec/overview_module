@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 
 const app = express();
 const bodyParser = require('body-parser');
@@ -9,6 +10,7 @@ const port = 3333;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '/../client/dist')));
+app.use(cors());
 
 app.get('/', (req, res) => {
   res.send('hello world');
