@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 import { Container } from 'react-bootstrap';
 import Navibar from './Logo-And-Searchbar/Navibar.jsx';
-import Stars from './Product-Information/Stars.jsx';
 
 class App extends Component {
   constructor(props) {
@@ -12,23 +11,22 @@ class App extends Component {
 
   render() {
     return (
-      <Container className="full-container">
+      <Container className='full-container'>
         <Navibar />
-        <Container className="announcement-message">
-          STATE-WIDE ANNOUNCEMENT MESSAGE! —— SALE / DISCOUNT
-          {' '}
+        <Container className='announcement-message'>
+          STATE-WIDE ANNOUNCEMENT MESSAGE! —— SALE / DISCOUNT{' '}
           <strong>OFFER</strong>
           ——
           <u>NEW PRODUCT HIGHTLIGHT</u>
         </Container>
-        <Container className="main-container">
-          <Container className="image-gallery">Image-gallery</Container>
+        <Container className='main-container'>
+          <Container className='image-gallery'>Image Gallery</Container>
           <Container>
-            <Container className="product-information">
-              <Stars />
+            <Container className='product-information'>
+              Product Information
             </Container>
-            <Container className="style-selector">Style selector</Container>
-            <Container className="add-to-cart">Add to Cart</Container>
+            <Container className='style-selector'>Style Selector</Container>
+            <Container className='add-to-cart'>Add to Cart</Container>
           </Container>
         </Container>
       </Container>
