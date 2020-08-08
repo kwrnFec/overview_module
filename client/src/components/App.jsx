@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import { Container } from 'react-bootstrap';
 import Navibar from './Logo-And-Searchbar/Navibar.jsx';
+import ControlledCarousel from './Image-Gallery/ImageGallery.jsx';
 
 class App extends Component {
   constructor(props) {
@@ -11,7 +12,7 @@ class App extends Component {
 
   render() {
     return (
-      <Container className='full-container'>
+      <Container fluid className='full-container'>
         <Navibar />
         <Container className='announcement-message'>
           STATE-WIDE ANNOUNCEMENT MESSAGE! —— SALE / DISCOUNT{' '}
@@ -19,8 +20,10 @@ class App extends Component {
           ——
           <u>NEW PRODUCT HIGHTLIGHT</u>
         </Container>
-        <Container className='main-container'>
-          <Container className='image-gallery'>Image Gallery</Container>
+        <Container fluid className='main-container'>
+          <Container className='image-gallery'>
+            <ControlledCarousel />
+          </Container>
           <Container>
             <Container className='product-information'>
               Product Information
