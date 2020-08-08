@@ -24,7 +24,7 @@ function ControlledCarousel() {
       <Carousel.Item>
         <img
           className='d-block w-100'
-          src="https://features.japantimes.co.jp/wp-content/uploads/2019/02/tokyoknights-slide4.jpg"
+          src='https://features.japantimes.co.jp/wp-content/uploads/2019/02/tokyoknights-slide4.jpg'
           alt='Second slide'
         />
 

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Axios from 'axios';
 
 import { Container, Row, Col } from 'react-bootstrap';
 import Navibar from './Logo-And-Searchbar/Navibar.jsx';
@@ -10,51 +11,31 @@ class App extends Component {
     this.state = {};
   }
 
+
+
   render() {
     return (
-      // <Container fluid className='full-container'>
-      //   <Navibar />
-      //   <Container className='announcement-message'>
-      //     STATE-WIDE ANNOUNCEMENT MESSAGE! —— SALE / DISCOUNT{' '}
-      //     <strong>OFFER</strong>
-      //     ——
-      //     <u>NEW PRODUCT HIGHTLIGHT</u>
-      //   </Container>
-      //   <Container fluid className='main-container'>
-      //     <Container className='image-gallery'>
-      //       <ControlledCarousel />
-      //     </Container>
-      //     <Container>
-      //       <Container className='product-information'>
-      //         Product Information
-      //       </Container>
-      //       <Container className='style-selector'>Style Selector</Container>
-      //       <Container className='add-to-cart'>Add to Cart</Container>
-      //     </Container>
-      //   </Container>
-      // </Container>
-
-      <Container fluid className='fluid-container'>
+      <Container fluid className='full-container'>
         <Navibar />
+        <Container fluid className='announcement-message'>
+          <Row>
+            <Col>
+              STATE-WIDE ANNOUNCEMENT MESSAGE! —— SALE / DISCOUNT{' '}
+              <strong>OFFER</strong>
+              ——
+              <u>NEW PRODUCT HIGHTLIGHT</u>
+            </Col>
+          </Row>
+        </Container>
         <Row>
-          <Col
-            sm={{ span: 12, offset: 3 }}
-            md={{ span: 12, offset: 3 }}
-            lg={{ span: 12, offset: 3 }}
-          >
-            STATE-WIDE ANNOUNCEMENT MESSAGE! —— SALE / DISCOUNT{' '}
-            <strong>OFFER</strong>
-            ——
-            <u>NEW PRODUCT HIGHTLIGHT</u>
+          <Col className='image-gallery'>
+            <ControlledCarousel />
           </Col>
-        </Row>
-        <Row>
-          <Col>ImageGallery</Col>
           <Col>
             <Row xs={1} sm={1} md={1} lg={1}>
-              <Col>Product Information</Col>
-              <Col>Style Selector</Col>
-              <Col>Add to Cart</Col>
+              <Col className='product-information'>Product Information</Col>
+              <Col className='style-selector'>Style Selector</Col>
+              <Col className='add-to-cart'>Add to Cart</Col>
             </Row>
           </Col>
         </Row>
