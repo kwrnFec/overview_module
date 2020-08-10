@@ -1,45 +1,55 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
+import Axios from 'axios';
 
 import { Container, Row, Col } from 'react-bootstrap';
 import Navibar from './Logo-And-Searchbar/Navibar.jsx';
+import ControlledCarousel from './Image-Gallery/ImageGallery.jsx';
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+const App = () => {
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [products, setProducts] = useState([]);
 
-  render() {
-    return (
-      <Container className='container' fluid>
-        <Row className='row-zero'>
-          <Col>
-            <Navibar />
-          </Col>
-          {/* <div>
-            <p>
-              SITE-WIDE ANNOUNCEMENTS MESSAGE! —— SALE / DISCOUNT{' '}
-              <strong>OFFER</strong> —— <u>NEW PRODUCT HIGHLIGHT</u>
-            </p>
-          </div> */}
-        </Row>
-        <Row className='row-one' xl={9}>
-          <Col className='col image-gallery-col' md={9}>
-            image gallery
-          </Col>
-          <Col className='col star-ratings-col' md={3}>
-            star ratings
-          </Col>
-        </Row>
+  useEffect(() => {
+    Axios.get('http://localhost:3333/products/list')
+      .then((res) => {
+        setIsLoaded(true);
+        setProducts(res.data);
+      },
+      (err) => {
+        setIsLoaded(true);
+        console.log(err);
+      },
+      );
+  }, []);
 
+  return (
+    <Container fluid className="full-container">
+      <Navibar />
+      <Container fluid className="announcement-message">
         <Row>
           <Col>
-            CATEGORY
+            STATE-WIDE ANNOUNCEMENT MESSAGE! —— SALE / DISCOUNT
+            {' '}
+            <strong>OFFER</strong>
+            ——
+            <u>NEW PRODUCT HIGHTLIGHT</u>
           </Col>
         </Row>
       </Container>
-    );
-  }
-}
+      <Row>
+        <Col className="image-gallery">
+          <ControlledCarousel />
+        </Col>
+        <Col>
+          <Row xs={1} sm={1} md={1} lg={1}>
+            <Col className="product-information">Product Information</Col>
+            <Col className="style-selector">Style Selector</Col>
+            <Col className="add-to-cart">Add to Cart</Col>
+          </Row>
+        </Col>
+      </Row>
+    </Container>
+  );
+};
 
 export default App;

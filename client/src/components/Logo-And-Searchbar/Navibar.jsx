@@ -10,7 +10,7 @@ import {
 } from 'react-bootstrap';
 
 const Navibar = () => (
-  <Navbar bg='light' variant='light' className='nav-bar'>
+  <Navbar bg='light' variant='light' className='nav-bar' className="navbar-container">
     <Navbar.Brand href='#home'>
       <img
         src='https://sun9-72.userapi.com/c846122/v846122963/2df4a/r2bbSNgzhR4.jpg'
@@ -20,7 +20,7 @@ const Navibar = () => (
         alt='Knight Logo'
       />
     </Navbar.Brand>
-    <Nav className='mr-auto'></Nav>
+    <Nav className='mr-auto' />
     <Form inline>
       <FormControl type='text' placeholder='Search' className='mr-sm-2' />
       <Button variant=''>
