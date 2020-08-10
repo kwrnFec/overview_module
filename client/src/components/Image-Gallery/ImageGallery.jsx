@@ -1,13 +1,35 @@
 import React, { useState, useEffect } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
+import Axios from 'axios';
 
 const ControlledCarousel = () => {
   const [index, setIndex] = useState(0);
-
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [productId, setProductId] = useState(1);
+  const [image, setImage] = useState([]);
 
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);
   };
+
+  // console.log("setProd: ", setProductId(productId));
+
+
+  useEffect(() => {
+    Axios.get(`http://52.26.193.201:3000/products/${Math.floor(Math.random() * 100)}/styles`)
+      .then((res) => {
+        console.log('RES DATA IMG GAL: ', res.data);
+        setIsLoaded(true);
+        setProductId(res.data);
+      },
+      (err) => {
+        setIsLoaded(true);
+        console.log(err);
+      },
+      );
+  }, []);
+
+  // while there is
 
   return (
     <Carousel activeIndex={index} onSelect={handleSelect}>

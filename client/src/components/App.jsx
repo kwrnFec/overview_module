@@ -4,8 +4,6 @@ import Axios from 'axios';
 import { Container, Row, Col } from 'react-bootstrap';
 import Navibar from './Logo-And-Searchbar/Navibar.jsx';
 import ControlledCarousel from './Image-Gallery/ImageGallery.jsx';
-import AddToCart from './Add-To-Cart';
-
 
 const App = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -13,15 +11,14 @@ const App = () => {
 
   useEffect(() => {
     Axios.get('http://localhost:3333/products/list')
-      .then(
-        (res) => {
-          setIsLoaded(true);
-          setProducts(res.data);
-        },
-        (err) => {
-          setIsLoaded(true);
-          console.log(err);
-        },
+      .then((res) => {
+        setIsLoaded(true);
+        setProducts(res.data);
+      },
+      (err) => {
+        setIsLoaded(true);
+        console.log(err);
+      },
       );
   }, []);
 
