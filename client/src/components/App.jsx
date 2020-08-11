@@ -8,6 +8,11 @@ import ControlledCarousel from './Image-Gallery/ImageGallery.jsx';
 const App = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [products, setProducts] = useState([]);
+  const [productId, setProductId] = useState(1);
+  const [currentProduct, setCurrentProduct] = useState(null);
+  const [currentPrice, setCurrentPrice] = useState(null);
+  const [currentProductName, setCurrentProductName] = useState(null);
+  const [currentProductCategory, setCurrentProductCategory] = useState(null);
 
   useEffect(() => {
     Axios.get('http://localhost:3333/products/list')
@@ -19,6 +24,24 @@ const App = () => {
         setIsLoaded(true);
         console.log(err);
       },
+      );
+  }, []);
+
+  useEffect(() => {
+    Axios.get(
+      `http://52.26.193.201:3000/products/${productId}/`)
+      .then((res) => {
+        console.log('RES DATA IMG GAL: ', res.data);
+        setIsLoaded(true);
+        setCurrentProduct(res.data);
+        setCurrentPrice(res.data.default_price);
+        setCurrentProductName(res.data.name);
+        setCurrentProductCategory(res.data.category);
+      },
+      (err) => {
+        setIsLoaded(true);
+        console.log(err);
+      }
       );
   }, []);
 
@@ -38,7 +61,7 @@ const App = () => {
       </Container>
       <Row>
         <Col className="image-gallery">
-          <ControlledCarousel />
+          <ControlledCarousel productId={productId} />
         </Col>
         <Col>
           <Row xs={1} sm={1} md={1} lg={1}>
