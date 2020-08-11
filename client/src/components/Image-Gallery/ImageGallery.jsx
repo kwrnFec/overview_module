@@ -5,7 +5,7 @@ import { render } from 'enzyme';
 
 const ControlledCarousel = ({ productId }) => {
   const [index, setIndex] = useState(0);
-  const [style, setStyle] = useState(0);
+  const [currentStyle, setCurrentStyle] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
   const [currentProductId, setCurrentProductId] = useState([]);
 
@@ -14,57 +14,59 @@ const ControlledCarousel = ({ productId }) => {
   };
 
   useEffect(() => {
-    Axios.get(
-      `http://52.26.193.201:3000/products/${productId}/styles`)
-      .then((res) => {
-        console.log('RES DATA STYLES: ', res.data);
+    Axios.get(`http://52.26.193.201:3000/products/${productId}/styles`).then(
+      (res) => {
         setIsLoaded(true);
-        setCurrentProductId(res.data.results);
+        setCurrentProductId(res.data.results[currentStyle]);
       },
       (err) => {
         setIsLoaded(true);
         console.log(err);
       }
-      );
-  }, []);
+    );
+  }, [currentStyle]);
 
-  const renderThumbnails = () => (
-    currentProductId.map((style) => (
-      style.photos.map((thumbnail) => (
+  const renderThumbnails = () =>
+    (currentProductId.photos ? (
+      currentProductId.photos.map((thumbnail, i) => (
         <img
           className="d-block thumbnail-image"
           src={thumbnail.url}
           alt="thumbnail"
-          />
+          onClick={() => setIndex(i)}
+        />
       ))
-    ))
-
-  );
+    ) : (
+      <div>Error! Try reloading...</div>
+    ));
 
   return (
     <div className="carousel-container">
       <Carousel
         autoPlay={false}
         interval={null}
-        activeIndex={index}
-        onSelect={handleSelect}
         wrap={false}
         indicators={false}
+        activeIndex={index}
+        onSelect={handleSelect}
       >
-        {currentProductId.map((style) => (
-          style.photos.map((photo) => (
+        {currentProductId.photos ? (
+          currentProductId.photos.map((photo) => (
             <Carousel.Item>
-              <img className='d-block w-100' src={photo.url} alt='First slide' />
+              <img
+                className="d-block w-100"
+                src={photo.url}
+                alt="First slide"
+              />
             </Carousel.Item>
           ))
-        ))}
+        ) : (
+          <div>Error! Try reloading...</div>
+        )}
       </Carousel>
 
       <div className="thumbnails-container">
-        <div className="thumnails-list">
-        {renderThumbnails()}
-
-        </div>
+        <div className="thumnails-list">{renderThumbnails()}</div>
       </div>
     </div>
   );

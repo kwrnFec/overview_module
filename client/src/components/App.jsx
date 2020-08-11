@@ -31,7 +31,6 @@ const App = () => {
     Axios.get(
       `http://52.26.193.201:3000/products/${productId}/`)
       .then((res) => {
-        console.log('RES DATA IMG GAL: ', res.data);
         setIsLoaded(true);
         setCurrentProduct(res.data);
         setCurrentPrice(res.data.default_price);
