@@ -4,15 +4,20 @@ import Axios from 'axios';
 import { Container, Row, Col } from 'react-bootstrap';
 import Navibar from './Logo-And-Searchbar/Navibar.jsx';
 import ControlledCarousel from './Image-Gallery/ImageGallery.jsx';
+import ProductDescription from './Product-Description/ProductDescription.jsx';
+import ProductInformation from './Product-Information/ProductInformation.jsx';
 
 const App = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [products, setProducts] = useState([]);
-  const [productId, setProductId] = useState(1);
-  const [currentProduct, setCurrentProduct] = useState(null);
-  const [currentPrice, setCurrentPrice] = useState(null);
-  const [currentProductName, setCurrentProductName] = useState(null);
-  const [currentProductCategory, setCurrentProductCategory] = useState(null);
+  const [productId, setProductId] = useState(5);
+  const [currentProductId, setCurrentProductId] = useState([]);
+  const [style, setStyle] = useState(0);
+  const [product, setProduct] = useState(null);
+  const [originalPrice, setOriginalPrice] = useState(null);
+  const [salePrice, setSalePrice] = useState(null);
+  const [productName, setProductName] = useState(null);
+  const [productCategory, setProductCategory] = useState(null);
 
   useEffect(() => {
     Axios.get('http://localhost:3333/products/list')
@@ -23,26 +28,38 @@ const App = () => {
       (err) => {
         setIsLoaded(true);
         console.log(err);
-      },
-      );
+      });
   }, []);
 
   useEffect(() => {
-    Axios.get(
-      `http://52.26.193.201:3000/products/${productId}/`)
+    Axios.get(`http://52.26.193.201:3000/products/${productId}/`)
       .then((res) => {
+        console.log('DATA: ', res.data);
         setIsLoaded(true);
-        setCurrentProduct(res.data);
-        setCurrentPrice(res.data.default_price);
-        setCurrentProductName(res.data.name);
-        setCurrentProductCategory(res.data.category);
+        setProduct(res.data);
+        setProductName(res.data.name);
+        setProductCategory(res.data.category);
       },
       (err) => {
         setIsLoaded(true);
         console.log(err);
-      }
-      );
+      });
   }, []);
+
+  useEffect(() => {
+    Axios.get(`http://52.26.193.201:3000/products/${productId}/styles`)
+      .then((res) => {
+        setIsLoaded(true);
+        console.log(' style: ', res.data.results[style]);
+        setCurrentProductId(res.data.results[style]);
+        setOriginalPrice(res.data.results[style].original_price);
+        setSalePrice(res.data.results[style].sale_price);
+      },
+      (err) => {
+        setIsLoaded(true);
+        console.log(err);
+      });
+  }, [productId, style]);
 
   return (
     <Container fluid className="full-container">
@@ -50,24 +67,41 @@ const App = () => {
       <Container fluid className="announcement-message">
         <Row>
           <Col>
-            STATE-WIDE ANNOUNCEMENT MESSAGE! —— SALE / DISCOUNT
-            {' '}
-            <strong>OFFER</strong>
-            ——
-            <u>NEW PRODUCT HIGHTLIGHT</u>
+            <p className="announcement">
+              STATE-WIDE ANNOUNCEMENT MESSAGE! —— SALE / DISCOUNT
+              {' '}
+              <strong>OFFER</strong>
+              ——
+              <u>NEW PRODUCT HIGHTLIGHT</u>
+            </p>
           </Col>
         </Row>
       </Container>
       <Row>
         <Col className="image-gallery">
-          <ControlledCarousel productId={productId} />
+          <ControlledCarousel currentProductId={currentProductId} />
         </Col>
         <Col>
           <Row xs={1} sm={1} md={1} lg={1}>
-            <Col className="product-information">Product Information</Col>
+            <Col className="product-information">
+              <ProductInformation
+                product={product}
+                productName={productName}
+                productCategory={productCategory}
+                originalPrice={originalPrice}
+                salePrice={salePrice}
+              />
+            </Col>
             <Col className="style-selector">Style Selector</Col>
             <Col className="add-to-cart">Add to Cart</Col>
           </Row>
+        </Col>
+      </Row>
+      <Row xs={3} sm={3} md={3} lg={3}>
+        <Col className="product-description">
+          {product && (
+            <ProductDescription product={product} />
+          )}
         </Col>
       </Row>
     </Container>
