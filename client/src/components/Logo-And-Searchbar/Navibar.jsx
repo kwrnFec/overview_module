@@ -10,12 +10,12 @@ import {
 } from 'react-bootstrap';
 
 const Navibar = () => (
-  <Navbar bg='light' variant='light' className='nav-bar' className="navbar-container">
+  <Navbar bg='dark' variant='dark' className='nav-bar' className="navbar-container">
     <Navbar.Brand href='#home'>
       <img
-        src='https://sun9-72.userapi.com/c846122/v846122963/2df4a/r2bbSNgzhR4.jpg'
-        width='30'
-        height='30'
+        src='../../stylesheets/logo.png'
+        width="70"
+        height='40'
         className='d-inline-block align-top'
         alt='Knight Logo'
       />
@@ -25,7 +25,7 @@ const Navibar = () => (
       <FormControl type='text' placeholder='Search' className='mr-sm-2' />
       <Button variant=''>
         <img
-          src='https://www.netclipart.com/pp/m/95-955874_search-instagram-magnifying-glass-icon.png'
+          src='https://ds3sleep.com/wp-content/uploads/2019/05/screen-white-icong.png'
           width='30'
           height='30'
           className='d-inline-block align-top'
