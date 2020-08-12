@@ -1,19 +1,22 @@
+/* eslint-disable no-shadow */
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 
 import { Container, Row, Col } from 'react-bootstrap';
-import Navibar from './Logo-And-Searchbar/Navibar.jsx';
+import Navibar from './Navbar/Navibar.jsx';
 import ControlledCarousel from './Image-Gallery/ImageGallery.jsx';
 import ProductDescription from './Product-Description/ProductDescription.jsx';
 import ProductInformation from './Product-Information/ProductInformation.jsx';
+import StyleSelector from './Style-Selector/StyleSelector.jsx';
 
 const App = () => {
+  const [err, setErr] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [products, setProducts] = useState([]);
-  const [productId, setProductId] = useState(5);
-  const [currentProductId, setCurrentProductId] = useState([]);
-  const [style, setStyle] = useState(0);
-  const [product, setProduct] = useState(null);
+  const [product, setProduct] = useState({});
+  const [currentProductId, setCurrentProductId] = useState({});
+  const [productId, setProductId] = useState(1);
+  const [style, setStyle] = useState(2);
   const [originalPrice, setOriginalPrice] = useState(null);
   const [salePrice, setSalePrice] = useState(null);
   const [productName, setProductName] = useState(null);
@@ -27,7 +30,7 @@ const App = () => {
       },
       (err) => {
         setIsLoaded(true);
-        console.log(err);
+        setErr(err);
       });
   }, []);
 
@@ -42,7 +45,7 @@ const App = () => {
       },
       (err) => {
         setIsLoaded(true);
-        console.log(err);
+        setErr(err);
       });
   }, []);
 
@@ -50,18 +53,22 @@ const App = () => {
     Axios.get(`http://52.26.193.201:3000/products/${productId}/styles`)
       .then((res) => {
         setIsLoaded(true);
-        console.log(' style: ', res.data.results[style]);
+        console.log('style: ', res.data.results[style]);
         setCurrentProductId(res.data.results[style]);
         setOriginalPrice(res.data.results[style].original_price);
         setSalePrice(res.data.results[style].sale_price);
       },
       (err) => {
         setIsLoaded(true);
-        console.log(err);
+        setErr(err);
       });
   }, [productId, style]);
 
-  return (
+  if (err) {
+    return <div>Error: {err.message}</div>;
+  } if (!isLoaded) {
+    return <div>Loading...</div>;
+  } return (
     <Container fluid className="full-container">
       <Navibar />
       <Container fluid className="announcement-message">
@@ -92,7 +99,12 @@ const App = () => {
                 salePrice={salePrice}
               />
             </Col>
-            <Col className="style-selector">Style Selector</Col>
+            <Col className="style-selector">
+              <StyleSelector
+                product={product}
+                productId={productId}
+              />
+            </Col>
             <Col className="add-to-cart">Add to Cart</Col>
           </Row>
         </Col>

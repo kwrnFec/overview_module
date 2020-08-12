@@ -12,11 +12,12 @@ const ProductInformation = ({
     <h1 className="product-name">{productName}</h1>
     {salePrice === '0' ? (
       <div>
-        <h3> {'$' + originalPrice}</h3>
+        <p className="display-price"> {'$' + originalPrice}</p>
       </div>
     ) : (
-      <div className="sale-price-block">
-        <h3>{'$' + salePrice}</h3> <p id="struck-price">{'$' + originalPrice}</p>
+      <div>
+        <span className="sale-price-block display-price">{'$' + salePrice}</span>{' '}
+        <span className="sale-price-block" id="struck-price">{'$' + originalPrice}</span>
       </div>
     )}
   </div>
