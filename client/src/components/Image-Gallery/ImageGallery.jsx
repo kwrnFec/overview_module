@@ -24,7 +24,7 @@ const ControlledCarousel = ({ productId }) => {
         console.log(err);
       }
     );
-  }, [currentStyle]);
+  }, [productId, currentStyle]);
 
   const renderThumbnails = () =>
     (currentProductId.photos ? (
