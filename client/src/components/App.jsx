@@ -1,3 +1,4 @@
+/* eslint-disable import/extensions */
 /* eslint-disable no-shadow */
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
@@ -14,9 +15,11 @@ const App = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [products, setProducts] = useState([]);
   const [product, setProduct] = useState({});
-  const [currentProductId, setCurrentProductId] = useState({});
-  const [productId, setProductId] = useState(1);
-  const [style, setStyle] = useState(2);
+  const [productStyles, setProductStyles] = useState([]);
+  const [currentStyle, setCurrentStyle] = useState({});
+  const [productId, setProductId] = useState(10);
+  const [currentStyleIndex, setCurrentStyleIndex] = useState(0);
+  const [currentStyleId, setCurrentStyleId] = useState(1);
   const [originalPrice, setOriginalPrice] = useState(null);
   const [salePrice, setSalePrice] = useState(null);
   const [productName, setProductName] = useState(null);
@@ -24,6 +27,7 @@ const App = () => {
 
   useEffect(() => {
     Axios.get('http://localhost:3333/products/list')
+    // Axios.get('http://18.224.200.47/products/list')
       .then((res) => {
         setIsLoaded(true);
         setProducts(res.data);
@@ -36,8 +40,9 @@ const App = () => {
 
   useEffect(() => {
     Axios.get(`http://52.26.193.201:3000/products/${productId}/`)
+    // Axios.get(`http://18.224.200.47/products/${productId}/`)
       .then((res) => {
-        console.log('DATA: ', res.data);
+        console.log('product: ', res.data);
         setIsLoaded(true);
         setProduct(res.data);
         setProductName(res.data.name);
@@ -47,22 +52,25 @@ const App = () => {
         setIsLoaded(true);
         setErr(err);
       });
-  }, []);
+  }, [productId]);
 
   useEffect(() => {
     Axios.get(`http://52.26.193.201:3000/products/${productId}/styles`)
+    // Axios.get(`http://18.224.200.47/products/${productId}/styles`)
       .then((res) => {
         setIsLoaded(true);
-        console.log('style: ', res.data.results[style]);
-        setCurrentProductId(res.data.results[style]);
-        setOriginalPrice(res.data.results[style].original_price);
-        setSalePrice(res.data.results[style].sale_price);
+        console.log('productStyles: ', res.data.results[currentStyleIndex]);
+        setProductStyles(res.data.results);
+        setCurrentStyle(res.data.results[currentStyleIndex]);
+        setCurrentStyleId(res.data.results[currentStyleIndex].style_id);
+        setOriginalPrice(res.data.results[currentStyleIndex].original_price);
+        setSalePrice(res.data.results[currentStyleIndex].sale_price);
       },
       (err) => {
         setIsLoaded(true);
         setErr(err);
       });
-  }, [productId, style]);
+  }, [productId, currentStyleIndex]);
 
   if (err) {
     return <div>Error: {err.message}</div>;
@@ -86,11 +94,11 @@ const App = () => {
       </Container>
       <Row>
         <Col className="image-gallery">
-          <ControlledCarousel currentProductId={currentProductId} />
+          <ControlledCarousel currentStyle={currentStyle} />
         </Col>
         <Col>
-          <Row xs={1} sm={1} md={1} lg={1}>
-            <Col className="product-information">
+          <Row >
+            <Col xs={12}className="product-information">
               <ProductInformation
                 product={product}
                 productName={productName}
@@ -99,13 +107,17 @@ const App = () => {
                 salePrice={salePrice}
               />
             </Col>
-            <Col className="style-selector">
+            <Col xs={6} className="style-selector">
               <StyleSelector
                 product={product}
-                productId={productId}
+                productStyles={productStyles}
+                currentStyleIndex={currentStyleIndex}
+                setCurrentStyleIndex={setCurrentStyleIndex}
+                currentStyle={currentStyle}
+                currentStyleId={currentStyleId}
               />
             </Col>
-            <Col className="add-to-cart">Add to Cart</Col>
+            <Col xs={12}className="add-to-cart">Add to Cart</Col>
           </Row>
         </Col>
       </Row>
