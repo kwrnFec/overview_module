@@ -3,15 +3,15 @@ import Carousel from 'react-bootstrap/Carousel';
 import Axios from 'axios';
 import { render } from 'enzyme';
 
-const ControlledCarousel = ({ currentProductId }) => {
+const ControlledCarousel = ({ currentStyle }) => {
   const [index, setIndex] = useState(0);
 
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);
   };
 
-  const renderThumbnails = () => (currentProductId.photos && (
-    currentProductId.photos.map((thumbnail, i) => (
+  const renderThumbnails = () => (currentStyle.photos && (
+    currentStyle.photos.map((thumbnail, i) => (
       <img
         className="d-block thumbnail-image"
         src={thumbnail.url}
@@ -31,8 +31,8 @@ const ControlledCarousel = ({ currentProductId }) => {
         activeIndex={index}
         onSelect={handleSelect}
       >
-        {currentProductId.photos && (
-          currentProductId.photos.map((photo) => (
+        {currentStyle.photos && (
+          currentStyle.photos.map((photo) => (
             <Carousel.Item>
               <img
                 className="d-block w-100"

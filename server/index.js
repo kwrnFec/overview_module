@@ -8,6 +8,7 @@ const path = require('path');
 
 const port = 3333;
 const url = 'http://52.26.193.201:3000';
+// const url = 'http://18.224.200.47/';
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
