@@ -13,7 +13,7 @@ const Navibar = () => (
     <Navbar.Brand href="#home">
       <img
         src="https://i.imgur.com/NZYErNZ.png"
-        width="190"
+        width="200"
         height="60"
         className="d-inline-block align-top logo"
         alt="Knight Logo"
