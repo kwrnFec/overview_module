@@ -100,9 +100,8 @@ const App = () => {
         </Col>
         <Col>
           <Row >
-            <Col xs={12}className="product-information">
+            <Col xs={12} className="product-information">
               <ProductInformation
-                product={product}
                 productName={productName}
                 productCategory={productCategory}
                 originalPrice={originalPrice}
@@ -111,16 +110,13 @@ const App = () => {
             </Col>
             <Col xs={6} className="style-selector">
               <StyleSelector
-                product={product}
                 productStyles={productStyles}
-                currentStyleIndex={currentStyleIndex}
                 setCurrentStyleIndex={setCurrentStyleIndex}
-                currentStyle={currentStyle}
                 currentStyleId={currentStyleId}
                 styleName={styleName}
               />
             </Col>
-            <Col xs={12}className="add-to-cart">Add to Cart</Col>
+            <Col xs={12} className="add-to-cart">Add to Cart</Col>
           </Row>
         </Col>
       </Row>

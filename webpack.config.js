@@ -18,7 +18,7 @@ module.exports = {
         use: ‘babel-loader’,
       },
       {
-        test: /\.css$/i,
+        test: /\.css$/,
         exclude: /node_modules/,
         use: [
           ‘style-loader’,
@@ -30,6 +30,15 @@ module.exports = {
           },
         ],
       },
+      {
+        test: /\.(jpg|png|svg)$/,
+        use: {
+            loader: 'url-loader',
+            options: {
+                limit: 25000
+            }
+        }
+    }
     ],
   },
 };
