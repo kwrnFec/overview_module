@@ -17,13 +17,14 @@ const App = () => {
   const [product, setProduct] = useState({});
   const [productStyles, setProductStyles] = useState([]);
   const [currentStyle, setCurrentStyle] = useState({});
-  const [productId, setProductId] = useState(10);
+  const [productId, setProductId] = useState(1);
   const [currentStyleIndex, setCurrentStyleIndex] = useState(0);
   const [currentStyleId, setCurrentStyleId] = useState(1);
   const [originalPrice, setOriginalPrice] = useState(null);
   const [salePrice, setSalePrice] = useState(null);
   const [productName, setProductName] = useState(null);
   const [productCategory, setProductCategory] = useState(null);
+  const [styleName, setStyleName] = useState(null);
 
   useEffect(() => {
     Axios.get('http://localhost:3333/products/list')
@@ -63,6 +64,7 @@ const App = () => {
         setProductStyles(res.data.results);
         setCurrentStyle(res.data.results[currentStyleIndex]);
         setCurrentStyleId(res.data.results[currentStyleIndex].style_id);
+        setStyleName(res.data.results[currentStyleIndex].name);
         setOriginalPrice(res.data.results[currentStyleIndex].original_price);
         setSalePrice(res.data.results[currentStyleIndex].sale_price);
       },
@@ -115,6 +117,7 @@ const App = () => {
                 setCurrentStyleIndex={setCurrentStyleIndex}
                 currentStyle={currentStyle}
                 currentStyleId={currentStyleId}
+                styleName={styleName}
               />
             </Col>
             <Col xs={12}className="add-to-cart">Add to Cart</Col>
