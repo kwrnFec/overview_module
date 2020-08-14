@@ -9,6 +9,7 @@ import ControlledCarousel from './Image-Gallery/ImageGallery.jsx';
 import ProductDescription from './Product-Description/ProductDescription.jsx';
 import ProductInformation from './Product-Information/ProductInformation.jsx';
 import StyleSelector from './Style-Selector/StyleSelector.jsx';
+import ShoppingCart from './Shopping-Cart/ShoppingCart.jsx';
 
 const App = () => {
   const [err, setErr] = useState(null);
@@ -116,7 +117,9 @@ const App = () => {
                 styleName={styleName}
               />
             </Col>
-            <Col xs={12} className="add-to-cart">Add to Cart</Col>
+            <Col xs={12} className="add-to-cart">
+              <ShoppingCart />
+            </Col>
           </Row>
         </Col>
       </Row>
