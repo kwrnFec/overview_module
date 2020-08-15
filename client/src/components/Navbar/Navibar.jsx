@@ -16,8 +16,9 @@ const Navibar = () => (
         width="200"
         height="60"
         className="d-inline-block align-top logo"
-        alt="Knight Logo"
+        alt=""
       />
+      {/* GREENFIELD */}
     </Navbar.Brand>
     <Nav className="mr-auto" />
     <Form inline>
