@@ -28,6 +28,7 @@ const ShoppingCart = ({ styleSkus, productName, styleName, displayedPrice }) => 
   }
 
   const handleQuantitySelect = (eKey) => {
+    setSelectedQuantity(quantityList[eKey]);
     setQtyIdx(quantityList[eKey]);
   };
 
@@ -36,6 +37,7 @@ const ShoppingCart = ({ styleSkus, productName, styleName, displayedPrice }) => 
   );
 
   const selectQuantityTitle = () => (
+
     quantityList.length === 0
       ? '-'
       : !qtyIdx
@@ -98,7 +100,15 @@ const ShoppingCart = ({ styleSkus, productName, styleName, displayedPrice }) => 
           <DropdownButton
             bsPrefix="cart-select-quantity"
             id="dropdown-basic-button"
-            title={selectQuantityTitle()}
+            title={quantityList.length === 0
+              ? '-'
+              : !qtyIdx
+                ? 1
+                : qtyIdx > quantityList.length
+                  ? quantityList[quantityList.length - 1]
+                  : qtyIdx < quantityList.length
+                    ? qtyIdx
+                    : qtyIdx}
           >
             {quantityList.map((quantity, i) => (
               <Dropdown.Item eventKey={i} onSelect={handleQuantitySelect}>
