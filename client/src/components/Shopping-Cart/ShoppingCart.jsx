@@ -3,22 +3,20 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, DropdownButton, Dropdown } from 'react-bootstrap';
 
-const ShoppingCart = ({ currentStyle, styleSkus }) => {
+const ShoppingCart = ({ styleSkus }) => {
   const [cart, setCart] = useState([]);
-  const [wasClicked, setWasClicked] = useState(false);
   const [selectedSize, setSelectedSize] = useState(null);
   const [selectedQuantity, setSelectedQuantity] = useState(0);
   const [qtyIdx, setQtyIdx] = useState(0);
 
   let inStock = true;
   for (const sku in styleSkus) {
-    if ((styleSkus[sku] > 0 in styleSkus) || !sku) {
+    if ((styleSkus[sku] > 0 in styleSkus) || sku === 'null') {
       inStock = false;
     }
   }
 
   const clickedAndSelectSku = (size, quantity) => {
-    setWasClicked(true);
     setSelectedSize(size);
     setSelectedQuantity(quantity);
   };
