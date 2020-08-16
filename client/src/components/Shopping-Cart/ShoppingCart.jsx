@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 /* eslint-disable no-nested-ternary */
 import React, { useState } from 'react';
 import { Container, Row, Col, DropdownButton, Dropdown } from 'react-bootstrap';
@@ -10,11 +11,11 @@ const ShoppingCart = ({ currentStyle, styleSkus }) => {
   const [qtyIdx, setQtyIdx] = useState(0);
 
   let inStock = true;
-  Object.keys(styleSkus).forEach((sku) => {
-    if (styleSkus[sku].length === 0 || !sku) {
+  for (const sku in styleSkus) {
+    if ((styleSkus[sku] > 0 in styleSkus) || !sku) {
       inStock = false;
     }
-  });
+  }
 
   const clickedAndSelectSku = (size, quantity) => {
     setWasClicked(true);

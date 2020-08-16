@@ -14,7 +14,7 @@ import ShoppingCart from './Shopping-Cart/ShoppingCart.jsx';
 const App = () => {
   const [err, setErr] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [products, setProducts] = useState([]);
+  // const [products, setProducts] = useState([]);
   const [product, setProduct] = useState({});
   const [productStyles, setProductStyles] = useState([]);
   const [currentStyle, setCurrentStyle] = useState({});
@@ -28,18 +28,18 @@ const App = () => {
   const [styleName, setStyleName] = useState(null);
   const [styleSkus, setStyleSku] = useState({});
 
-  useEffect(() => {
-    Axios.get('http://localhost:3333/products/list')
-    // Axios.get('http://18.224.200.47/products/list')
-      .then((res) => {
-        setIsLoaded(true);
-        setProducts(res.data);
-      },
-      (err) => {
-        setIsLoaded(true);
-        setErr(err);
-      });
-  }, []);
+  // useEffect(() => {
+  //   Axios.get('http://localhost:3333/products/list')
+  //   // Axios.get('http://18.224.200.47/products/list')
+  //     .then((res) => {
+  //       setIsLoaded(true);
+  //       setProducts(res.data);
+  //     },
+  //     (err) => {
+  //       setIsLoaded(true);
+  //       setErr(err);
+  //     });
+  // }, []);
 
   useEffect(() => {
     Axios.get(`http://52.26.193.201:3000/products/${productId}/`)
@@ -78,7 +78,12 @@ const App = () => {
   }, [productId, currentStyleIndex]);
 
   if (err) {
-    return <div>Error: {err.message}</div>;
+    return (
+      <div>
+        Error:
+        {err.message}
+      </div>
+    );
   } if (!isLoaded) {
     return <div>Loading...</div>;
   } return (
