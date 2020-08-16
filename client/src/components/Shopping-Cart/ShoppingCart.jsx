@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, DropdownButton, Dropdown } from 'react-bootstrap';
 
-const ShoppingCart = ({ styleSkus }) => {
+const ShoppingCart = ({ styleSkus, productName, styleName, displayedPrice }) => {
   const [cart, setCart] = useState([]);
   const [selectedSize, setSelectedSize] = useState(null);
   const [selectedQuantity, setSelectedQuantity] = useState(0);
@@ -47,6 +47,35 @@ const ShoppingCart = ({ styleSkus }) => {
             : qtyIdx
   );
 
+  const sizeSelector = () => {
+    Object.entries(styleSkus).map((size, quantity) => quantity > 0 && (
+      <Dropdown.Item onClick={() => clickedAndSelectSku(size[0], quantity)}>
+        {size[0]}
+      </Dropdown.Item>
+    ));
+  };
+
+  const cartItem = {
+    product: productName,
+    style: styleName,
+    price: displayedPrice,
+    size: selectedSize,
+    quantity: selectedQuantity,
+  };
+
+  if (cartItem) {
+    console.log('cartItem: ', cartItem);
+  }
+
+  const handleShoppingCart = () => {
+    if (cartItem.size === 'null') {
+      alert('Please select size and quantity before continuing!');
+    } else {
+      cart.push(cartItem);
+      alert(`Product: ${cartItem.product}, Style: ${cartItem.style}, Size: ${cartItem.size}, QTY: ${cartItem.quantity}, Total: ${cartItem.price}, `)
+    }
+  };
+
   return (
     <Container fluid className="shopping-cart-container">
       <Row xs={3}>
@@ -56,11 +85,13 @@ const ShoppingCart = ({ styleSkus }) => {
             id="dropdown-basic-button dropdown-chevron"
             title={selectSizeTitle()}
           >
-            {Object.entries(styleSkus).map((size, quantity) => quantity > 0 && (
-              <Dropdown.Item onClick={() => clickedAndSelectSku(size[0], quantity)}>
-                {size[0]}
-              </Dropdown.Item>
-            ))}
+            {
+            Object.entries(styleSkus).map((size, quantity) => quantity > 0 && (
+            <Dropdown.Item onClick={() => clickedAndSelectSku(size[0], quantity)}>
+              {size[0]}
+            </Dropdown.Item>
+            ))
+            }
           </DropdownButton>
         </Col>
         <Col>

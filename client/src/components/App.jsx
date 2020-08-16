@@ -14,11 +14,10 @@ import ShoppingCart from './Shopping-Cart/ShoppingCart.jsx';
 const App = () => {
   const [err, setErr] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
-  // const [products, setProducts] = useState([]);
   const [product, setProduct] = useState({});
   const [productStyles, setProductStyles] = useState([]);
   const [currentStyle, setCurrentStyle] = useState({});
-  const [productId, setProductId] = useState(4);
+  const [productId, setProductId] = useState(1);
   const [currentStyleIndex, setCurrentStyleIndex] = useState(0);
   const [currentStyleId, setCurrentStyleId] = useState(1);
   const [originalPrice, setOriginalPrice] = useState(null);
@@ -27,19 +26,7 @@ const App = () => {
   const [productCategory, setProductCategory] = useState(null);
   const [styleName, setStyleName] = useState(null);
   const [styleSkus, setStyleSku] = useState({});
-
-  // useEffect(() => {
-  //   Axios.get('http://localhost:3333/products/list')
-  //   // Axios.get('http://18.224.200.47/products/list')
-  //     .then((res) => {
-  //       setIsLoaded(true);
-  //       setProducts(res.data);
-  //     },
-  //     (err) => {
-  //       setIsLoaded(true);
-  //       setErr(err);
-  //     });
-  // }, []);
+  const [displayedPrice, setDisplayedPrice] = useState(null);
 
   useEffect(() => {
     Axios.get(`http://52.26.193.201:3000/products/${productId}/`)
@@ -107,13 +94,14 @@ const App = () => {
           <ControlledCarousel currentStyle={currentStyle} />
         </Col>
         <Col>
-          <Row >
+          <Row>
             <Col xs={12} className="product-information">
               <ProductInformation
                 productName={productName}
                 productCategory={productCategory}
                 originalPrice={originalPrice}
                 salePrice={salePrice}
+                setDisplayedPrice={setDisplayedPrice}
               />
             </Col>
             <Col xs={6} className="style-selector">
@@ -128,6 +116,9 @@ const App = () => {
               <ShoppingCart
                 productStyles={productStyles}
                 styleSkus={styleSkus}
+                productName={productName}
+                styleName={styleName}
+                displayedPrice={displayedPrice}
               />
             </Col>
           </Row>

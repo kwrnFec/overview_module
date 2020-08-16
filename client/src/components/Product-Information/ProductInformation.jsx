@@ -15,9 +15,15 @@ const ProductInformation = ({
   salePrice,
   productName,
   productCategory,
+  setDisplayedPrice
 }) => {
   const shareUrl = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
   const title = 'Rick Rolled!';
+
+  const setPrice = (price) => {
+    setDisplayedPrice(price);
+    return '$' + price;
+  };
 
   return (
     <div>
@@ -56,12 +62,12 @@ const ProductInformation = ({
       <h1 className="product-name">{productName}</h1>
       {salePrice === '0' ? (
         <div>
-          <p className="display-price"> {'$' + originalPrice}</p>
+          <p className="display-price"> {setPrice(originalPrice)}</p>
         </div>
       ) : (
         <div>
           <span className="sale-price-block display-price">
-            {'$' + salePrice}
+            {setPrice(salePrice)}
           </span>
           {' '}
           <span className="sale-price-block" id="struck-price">
