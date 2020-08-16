@@ -28,8 +28,11 @@ const ShoppingCart = ({ styleSkus, productName, styleName, displayedPrice }) => 
   }
 
   const handleQuantitySelect = (eKey) => {
-    setSelectedQuantity(quantityList[eKey]);
     setQtyIdx(quantityList[eKey]);
+    if (qtyIdx === undefined) {
+      setQtyIdx(1);
+      cartItem.quantity = 1;
+    }
   };
 
   const selectSizeTitle = () => (
@@ -37,7 +40,6 @@ const ShoppingCart = ({ styleSkus, productName, styleName, displayedPrice }) => 
   );
 
   const selectQuantityTitle = () => (
-
     quantityList.length === 0
       ? '-'
       : !qtyIdx
@@ -62,8 +64,12 @@ const ShoppingCart = ({ styleSkus, productName, styleName, displayedPrice }) => 
     style: styleName,
     price: displayedPrice,
     size: selectedSize,
-    quantity: selectedQuantity,
+    quantity: qtyIdx,
   };
+
+  if (cartItem.quantity === undefined) {
+    cartItem.quantity = 1;
+  }
 
   if (cartItem) {
     console.log('cartItem: ', cartItem);
