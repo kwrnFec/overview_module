@@ -1,13 +1,17 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable no-nested-ternary */
 import React, { useState } from 'react';
-import { Container, Row, Col, DropdownButton, Dropdown } from 'react-bootstrap';
+import { Container, Row, Col, DropdownButton, Dropdown, Button, Modal, Alert } from 'react-bootstrap';
 
 const ShoppingCart = ({ styleSkus, productName, styleName, displayedPrice }) => {
   const [cart, setCart] = useState([]);
   const [selectedSize, setSelectedSize] = useState(null);
   const [selectedQuantity, setSelectedQuantity] = useState(0);
   const [qtyIdx, setQtyIdx] = useState(0);
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   let inStock = true;
   for (const sku in styleSkus) {
@@ -51,14 +55,6 @@ const ShoppingCart = ({ styleSkus, productName, styleName, displayedPrice }) => 
             : qtyIdx
   );
 
-  const sizeSelector = () => {
-    Object.entries(styleSkus).map((size, quantity) => quantity > 0 && (
-      <Dropdown.Item onClick={() => clickedAndSelectSku(size[0], quantity)}>
-        {size[0]}
-      </Dropdown.Item>
-    ));
-  };
-
   const cartItem = {
     product: productName,
     style: styleName,
@@ -75,50 +71,110 @@ const ShoppingCart = ({ styleSkus, productName, styleName, displayedPrice }) => 
     console.log('cartItem: ', cartItem);
   }
 
+  const handleSelectSize = () => (
+    Object.entries(styleSkus).map((size, quantity) => quantity > 0 && (
+      <Dropdown.Item onClick={() => clickedAndSelectSku(size[0], quantity)}>
+        {size[0]}
+      </Dropdown.Item>
+    ))
+  );
+
+  const handleSelectQuantity = () => (
+    quantityList.map((quantity, i) => (
+      <Dropdown.Item eventKey={i} onSelect={handleQuantitySelect}>
+        {quantity}
+      </Dropdown.Item>
+    ))
+  );
+
   const handleShoppingCart = () => {
-    if (cartItem.size === 'null') {
-      alert('Please select size and quantity before continuing!');
-    } else {
-      cart.push(cartItem);
-      alert(`Product: ${cartItem.product}, Style: ${cartItem.style}, Size: ${cartItem.size}, QTY: ${cartItem.quantity}, Total: ${cartItem.price}, `)
+    if (!cartItem.size || cartItem.quantity === 0) {
+      console.log('size is null');
+      console.log('quantity is zero');
+      return (
+        // <Alert variant="danger" dismissible>
+        //   <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
+        //   <p>
+        //     Change this and that and try again. Duis mollis, est non commodo
+        //     luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
+        //     Cras mattis consectetur purus sit amet fermentum.
+        //   </p>
+        // </Alert>
+        alert('Please select a size')
+      );
     }
+    cart.push(cartItem);
+    console.log('cart: ', cart);
+    return handleShow();
   };
 
+
   return (
-    <Container fluid className="shopping-cart-container">
-      <Row xs={3}>
-        <Col>
+    <Container  className="shopping-cart-container">
+      <Row>
+        <Col md={4}>
           <DropdownButton
             bsPrefix="cart-select-size"
             id="dropdown-basic-button dropdown-chevron"
             title={selectSizeTitle()}
           >
-            {
-            Object.entries(styleSkus).map((size, quantity) => quantity > 0 && (
-            <Dropdown.Item onClick={() => clickedAndSelectSku(size[0], quantity)}>
-              {size[0]}
-            </Dropdown.Item>
-            ))
-            }
+            {handleSelectSize()}
           </DropdownButton>
         </Col>
-        <Col>
+        <Col md={2}>
           <DropdownButton
             bsPrefix="cart-select-quantity"
             id="dropdown-basic-button"
             title={selectQuantityTitle()}
           >
-            {quantityList.map((quantity, i) => (
-              <Dropdown.Item eventKey={i} onSelect={handleQuantitySelect}>
-                {quantity}
-              </Dropdown.Item>
-            ))}
+            {handleSelectQuantity()}
           </DropdownButton>
         </Col>
       </Row>
       <Row>
-        <Col>ADD TO BAG</Col>
-        <Col>STAR</Col>
+        <Col xs={6}>
+          <Button
+            bsPrefix="shopping-cart-btn"
+            variant="primary"
+            onClick={() => handleShoppingCart()}
+            // onClick={handleShow}
+          >
+            <span>ADD TO BAG</span>
+          </Button>
+
+          <Modal
+            show={show}
+            onHide={handleClose}
+            backdrop="static"
+            size="lg"
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+            keyboard={false}
+          >
+            <Modal.Header closeButton>
+              <Modal.Title>Modal title</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+             {`Product: ${cartItem.product}, Style: ${cartItem.style}, Size: ${cartItem.size}, QTY: ${cartItem.quantity}, Total: ${cartItem.price}, `}
+            </Modal.Body>
+            <Modal.Footer>
+              <Button
+                bsPrefix="shopping-cart-modal-close"
+                variant="secondary"
+                onClick={handleClose}
+              >
+                CANCEL
+              </Button>
+              <Button
+                variant="primary"
+                bsPrefix="shopping-cart-modal-understood"
+                onClick={handleClose}
+              >
+                ADD
+              </Button>
+            </Modal.Footer>
+          </Modal>
+        </Col>
       </Row>
     </Container>
   );
