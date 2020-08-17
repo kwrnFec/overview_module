@@ -63,7 +63,7 @@ const ShoppingCart = ({ styleSkus, productName, styleName, displayedPrice }) => 
     quantity: qtyIdx,
   };
 
-  if (cartItem.quantity === undefined) {
+  if (cartItem.quantity === undefined || cartItem.quantity === 0) {
     cartItem.quantity = 1;
   }
 
@@ -88,20 +88,9 @@ const ShoppingCart = ({ styleSkus, productName, styleName, displayedPrice }) => 
   );
 
   const handleShoppingCart = () => {
-    if (!cartItem.size || cartItem.quantity === 0) {
-      console.log('size is null');
-      console.log('quantity is zero');
-      return (
-        // <Alert variant="danger" dismissible>
-        //   <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
-        //   <p>
-        //     Change this and that and try again. Duis mollis, est non commodo
-        //     luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
-        //     Cras mattis consectetur purus sit amet fermentum.
-        //   </p>
-        // </Alert>
-        alert('Please select a size')
-      );
+    if (!cartItem.size) {
+      console.log('its null');
+      return alert('Please select a size');
     }
     cart.push(cartItem);
     console.log('cart: ', cart);
@@ -137,7 +126,6 @@ const ShoppingCart = ({ styleSkus, productName, styleName, displayedPrice }) => 
             bsPrefix="shopping-cart-btn"
             variant="primary"
             onClick={() => handleShoppingCart()}
-            // onClick={handleShow}
           >
             <span>ADD TO BAG</span>
           </Button>
@@ -159,7 +147,7 @@ const ShoppingCart = ({ styleSkus, productName, styleName, displayedPrice }) => 
             </Modal.Body>
             <Modal.Footer>
               <Button
-                bsPrefix="shopping-cart-modal-close"
+                bsPrefix="shopping-cart-modal-cancel"
                 variant="secondary"
                 onClick={handleClose}
               >
@@ -167,7 +155,7 @@ const ShoppingCart = ({ styleSkus, productName, styleName, displayedPrice }) => 
               </Button>
               <Button
                 variant="primary"
-                bsPrefix="shopping-cart-modal-understood"
+                bsPrefix="shopping-cart-modal-add"
                 onClick={handleClose}
               >
                 ADD
