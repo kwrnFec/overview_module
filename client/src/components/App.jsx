@@ -27,6 +27,7 @@ const App = () => {
   const [styleName, setStyleName] = useState(null);
   const [styleSkus, setStyleSku] = useState({});
   const [displayedPrice, setDisplayedPrice] = useState(null);
+  const [reviewsList, setReviewsList] = useState([]);
 
   useEffect(() => {
     Axios.get(`http://52.26.193.201:3000/products/${productId}/`)
@@ -64,6 +65,19 @@ const App = () => {
       });
   }, [productId, currentStyleIndex]);
 
+  useEffect(() => {
+    Axios.get(`http://52.26.193.201:3000/reviews/${productId}/list`)
+      .then((res) => {
+        setIsLoaded(true);
+        console.log('reviewList: ', res.data.results);
+        setReviewsList(res.data.results);
+      },
+      (err) => {
+        setIsLoaded(true);
+        setErr(err);
+      });
+  }, [productId]);
+
   if (err) {
     return (
       <div>
@@ -97,6 +111,7 @@ const App = () => {
           <Row>
             <Col xs={12} className="product-information">
               <ProductInformation
+                reviewsList={reviewsList}
                 productName={productName}
                 productCategory={productCategory}
                 originalPrice={originalPrice}

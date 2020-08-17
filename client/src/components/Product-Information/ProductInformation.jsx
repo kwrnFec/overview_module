@@ -9,13 +9,15 @@ import {
   FacebookShareCount,
   PinterestShareCount,
 } from 'react-share';
+import Stars from './Stars.jsx';
 
 const ProductInformation = ({
   originalPrice,
   salePrice,
   productName,
   productCategory,
-  setDisplayedPrice
+  setDisplayedPrice,
+  reviewsList
 }) => {
   const shareUrl = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
   const title = 'Rick Rolled!';
@@ -28,7 +30,9 @@ const ProductInformation = ({
   return (
     <div>
       <span className="stars-reviews reviews-share-inline">
-        stars Read all reviews
+        <div>
+          <Stars reviewsList={reviewsList} />
+        </div>
       </span>
       {' '}
       <span className="reviews-share-inline">
