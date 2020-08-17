@@ -9,15 +9,15 @@ import ControlledCarousel from './Image-Gallery/ImageGallery.jsx';
 import ProductDescription from './Product-Description/ProductDescription.jsx';
 import ProductInformation from './Product-Information/ProductInformation.jsx';
 import StyleSelector from './Style-Selector/StyleSelector.jsx';
+import ShoppingCart from './Shopping-Cart/ShoppingCart.jsx';
 
 const App = () => {
   const [err, setErr] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [products, setProducts] = useState([]);
   const [product, setProduct] = useState({});
   const [productStyles, setProductStyles] = useState([]);
   const [currentStyle, setCurrentStyle] = useState({});
-  const [productId, setProductId] = useState(3);
+  const [productId, setProductId] = useState(1);
   const [currentStyleIndex, setCurrentStyleIndex] = useState(0);
   const [currentStyleId, setCurrentStyleId] = useState(1);
   const [originalPrice, setOriginalPrice] = useState(null);
@@ -25,19 +25,8 @@ const App = () => {
   const [productName, setProductName] = useState(null);
   const [productCategory, setProductCategory] = useState(null);
   const [styleName, setStyleName] = useState(null);
-
-  useEffect(() => {
-    Axios.get('http://localhost:3333/products/list')
-    // Axios.get('http://18.224.200.47/products/list')
-      .then((res) => {
-        setIsLoaded(true);
-        setProducts(res.data);
-      },
-      (err) => {
-        setIsLoaded(true);
-        setErr(err);
-      });
-  }, []);
+  const [styleSkus, setStyleSku] = useState({});
+  const [displayedPrice, setDisplayedPrice] = useState(null);
 
   useEffect(() => {
     Axios.get(`http://52.26.193.201:3000/products/${productId}/`)
@@ -60,13 +49,14 @@ const App = () => {
     // Axios.get(`http://18.224.200.47/products/${productId}/styles`)
       .then((res) => {
         setIsLoaded(true);
-        console.log('productStyles: ', res.data.results[currentStyleIndex]);
+        console.log('currentStyle: ', res.data.results[currentStyleIndex]);
         setProductStyles(res.data.results);
         setCurrentStyle(res.data.results[currentStyleIndex]);
         setCurrentStyleId(res.data.results[currentStyleIndex].style_id);
         setStyleName(res.data.results[currentStyleIndex].name);
         setOriginalPrice(res.data.results[currentStyleIndex].original_price);
         setSalePrice(res.data.results[currentStyleIndex].sale_price);
+        setStyleSku(res.data.results[currentStyleIndex].skus);
       },
       (err) => {
         setIsLoaded(true);
@@ -75,7 +65,12 @@ const App = () => {
   }, [productId, currentStyleIndex]);
 
   if (err) {
-    return <div>Error: {err.message}</div>;
+    return (
+      <div>
+        Error:
+        {err.message}
+      </div>
+    );
   } if (!isLoaded) {
     return <div>Loading...</div>;
   } return (
@@ -99,13 +94,14 @@ const App = () => {
           <ControlledCarousel currentStyle={currentStyle} />
         </Col>
         <Col>
-          <Row >
+          <Row>
             <Col xs={12} className="product-information">
               <ProductInformation
                 productName={productName}
                 productCategory={productCategory}
                 originalPrice={originalPrice}
                 salePrice={salePrice}
+                setDisplayedPrice={setDisplayedPrice}
               />
             </Col>
             <Col xs={6} className="style-selector">
@@ -116,7 +112,15 @@ const App = () => {
                 styleName={styleName}
               />
             </Col>
-            <Col xs={12} className="add-to-cart">Add to Cart</Col>
+            <Col xs={12} className="add-to-cart">
+              <ShoppingCart
+                productStyles={productStyles}
+                styleSkus={styleSkus}
+                productName={productName}
+                styleName={styleName}
+                displayedPrice={displayedPrice}
+              />
+            </Col>
           </Row>
         </Col>
       </Row>

@@ -15,9 +15,15 @@ const ProductInformation = ({
   salePrice,
   productName,
   productCategory,
+  setDisplayedPrice
 }) => {
   const shareUrl = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
   const title = 'Rick Rolled!';
+
+  const setPrice = (price) => {
+    setDisplayedPrice(price);
+    return '$' + price;
+  };
 
   return (
     <div>
@@ -34,15 +40,6 @@ const ProductInformation = ({
           >
             <FacebookIcon size={32} round />
           </FacebookShareButton>
-
-          <div>
-            <FacebookShareCount
-              url={shareUrl}
-              className="some-network__share-count"
-            >
-              {(count) => count}
-            </FacebookShareCount>
-          </div>
         </div>
         <div className="some-network">
           <TwitterShareButton
@@ -52,34 +49,27 @@ const ProductInformation = ({
           >
             <TwitterIcon size={32} round />
           </TwitterShareButton>
-
-          <div className="some-network__share-count">&nbsp;</div>
         </div>
         <div className="some-network">
           <PinterestShareButton
-            url={String(window.location)}
-            // media={`${String(window.location)}/${exampleImage}`}
             className="some-network__share-button"
           >
             <PinterestIcon size={32} round />
           </PinterestShareButton>
-
-          <div>
-            <PinterestShareCount url={shareUrl} className="some-network__share-count" />
-          </div>
         </div>
       </span>
-      <p className="product-category">{productCategory}</p>
+      <p className="product-category">{productCategory && productCategory.toUpperCase()}</p>
       <h1 className="product-name">{productName}</h1>
       {salePrice === '0' ? (
         <div>
-          <p className="display-price"> {'$' + originalPrice}</p>
+          <p className="display-price"> {setPrice(originalPrice)}</p>
         </div>
       ) : (
         <div>
           <span className="sale-price-block display-price">
-            {'$' + salePrice}
-          </span>{' '}
+            {setPrice(salePrice)}
+          </span>
+          {' '}
           <span className="sale-price-block" id="struck-price">
             {'$' + originalPrice}
           </span>
