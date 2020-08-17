@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { Container, Row, Col, DropdownButton, Dropdown, Button, Modal, Alert } from 'react-bootstrap';
 
 const ShoppingCart = ({ styleSkus, productName, styleName, displayedPrice }) => {
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState({});
   const [selectedSize, setSelectedSize] = useState(null);
   const [selectedQuantity, setSelectedQuantity] = useState(0);
   const [qtyIdx, setQtyIdx] = useState(0);
@@ -58,7 +58,6 @@ const ShoppingCart = ({ styleSkus, productName, styleName, displayedPrice }) => 
   const handleQuantitySelect = (eKey) => {
     setQtyIdx(quantityList[eKey]);
     if (qtyIdx === undefined) {
-      setQtyIdx(1);
       cartItem.quantity = 1;
     }
   };
@@ -66,6 +65,10 @@ const ShoppingCart = ({ styleSkus, productName, styleName, displayedPrice }) => 
   if (cartItem.quantity === undefined || cartItem.quantity === 0) {
     cartItem.quantity = 1;
   }
+
+  // if (cartItem) {
+  //   console.log('cartItem: ', cartItem);
+  // }
 
   const handleSelectSize = () => (
     Object.entries(styleSkus).map((size, quantity) => quantity > 0 && (
@@ -87,9 +90,13 @@ const ShoppingCart = ({ styleSkus, productName, styleName, displayedPrice }) => 
     if (!cartItem.size) {
       return alert('Please select a size');
     }
-    cart.push(cartItem);
+    setCart(cartItem);
     return handleShow();
   };
+
+  // if (Object.entries(cart).length > 0) {
+  //   console.log('cart: ', cart);
+  // }
 
   return (
     <Container className="shopping-cart-container">
@@ -132,7 +139,7 @@ const ShoppingCart = ({ styleSkus, productName, styleName, displayedPrice }) => 
             keyboard={false}
           >
             <Modal.Header closeButton>
-              <Modal.Title>Modal title</Modal.Title>
+              <Modal.Title>Shopping Cart</Modal.Title>
             </Modal.Header>
             <Modal.Body>
               {`Product: ${cartItem.product}, Style: ${cartItem.style}, Size: ${cartItem.size}, QTY: ${cartItem.quantity}, Total: ${cartItem.price}, `}
