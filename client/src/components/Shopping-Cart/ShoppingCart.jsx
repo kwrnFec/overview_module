@@ -31,14 +31,6 @@ const ShoppingCart = ({ styleSkus, productName, styleName, displayedPrice }) => 
     quantityList.push(i + 1);
   }
 
-  const handleQuantitySelect = (eKey) => {
-    setQtyIdx(quantityList[eKey]);
-    if (qtyIdx === undefined) {
-      setQtyIdx(1);
-      cartItem.quantity = 1;
-    }
-  };
-
   const selectSizeTitle = () => (
     selectedSize || (inStock ? 'SELECT SIZE' : 'OUT OF STOCK')
   );
@@ -63,12 +55,16 @@ const ShoppingCart = ({ styleSkus, productName, styleName, displayedPrice }) => 
     quantity: qtyIdx,
   };
 
+  const handleQuantitySelect = (eKey) => {
+    setQtyIdx(quantityList[eKey]);
+    if (qtyIdx === undefined) {
+      setQtyIdx(1);
+      cartItem.quantity = 1;
+    }
+  };
+
   if (cartItem.quantity === undefined || cartItem.quantity === 0) {
     cartItem.quantity = 1;
-  }
-
-  if (cartItem) {
-    console.log('cartItem: ', cartItem);
   }
 
   const handleSelectSize = () => (
@@ -89,17 +85,14 @@ const ShoppingCart = ({ styleSkus, productName, styleName, displayedPrice }) => 
 
   const handleShoppingCart = () => {
     if (!cartItem.size) {
-      console.log('its null');
       return alert('Please select a size');
     }
     cart.push(cartItem);
-    console.log('cart: ', cart);
     return handleShow();
   };
 
-
   return (
-    <Container  className="shopping-cart-container">
+    <Container className="shopping-cart-container">
       <Row>
         <Col md={4}>
           <DropdownButton
@@ -129,7 +122,6 @@ const ShoppingCart = ({ styleSkus, productName, styleName, displayedPrice }) => 
           >
             <span>ADD TO BAG</span>
           </Button>
-
           <Modal
             show={show}
             onHide={handleClose}
@@ -143,7 +135,7 @@ const ShoppingCart = ({ styleSkus, productName, styleName, displayedPrice }) => 
               <Modal.Title>Modal title</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-             {`Product: ${cartItem.product}, Style: ${cartItem.style}, Size: ${cartItem.size}, QTY: ${cartItem.quantity}, Total: ${cartItem.price}, `}
+              {`Product: ${cartItem.product}, Style: ${cartItem.style}, Size: ${cartItem.size}, QTY: ${cartItem.quantity}, Total: ${cartItem.price}, `}
             </Modal.Body>
             <Modal.Footer>
               <Button
