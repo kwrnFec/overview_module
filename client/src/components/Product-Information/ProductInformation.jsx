@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   FacebookShareButton,
   TwitterShareButton,
@@ -30,9 +30,7 @@ const ProductInformation = ({
   return (
     <div>
       <span className="stars-reviews reviews-share-inline">
-        <div>
-          <Stars reviewsList={reviewsList} />
-        </div>
+        <Stars reviewsList={reviewsList} />
       </span>
       {' '}
       <span className="reviews-share-inline">
