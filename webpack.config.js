@@ -6,24 +6,24 @@ const DIST_DIR = path.join(__dirname, '/client/dist');
 module.exports = {
   entry: `${SRC_DIR}/index.jsx`,
   output: {
-    filename: ‘bundle.js’,
+    filename: 'bundle.js',
     path: DIST_DIR,
   },
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        exclude: /nodemodules/,
+        exclude: /node_modules/,
         include: [SRC_DIR],
-        use: ‘babel-loader’,
+        use: 'babel-loader',
       },
       {
         test: /\.css$/,
         exclude: /node_modules/,
         use: [
-          ‘style-loader’,
+          'style-loader',
           {
-            loader: ‘css-loader’,
+            loader: 'css-loader',
             options: {
               modules: true,
             },
@@ -33,13 +33,12 @@ module.exports = {
       {
         test: /\.(jpg|png|svg)$/,
         use: {
-            loader: 'url-loader',
-            options: {
-                limit: 25000
-            }
-        }
-    }
+          loader: 'url-loader',
+          options: {
+            limit: 25000,
+          },
+        },
+      },
     ],
   },
 };
-
