@@ -1,47 +1,67 @@
 import React from 'react';
-import {
-  FacebookShareButton,
-  TwitterShareButton,
-  PinterestShareButton,
-  FacebookIcon,
-  TwitterIcon,
-  PinterestIcon,
-} from 'react-share';
+import FacebookIcon from '../../../media/facebook_icon.png';
+import TwitterIcon from '../../../media/twitter_icon.png';
+import PinterestIcon from '../../../media/pinterest_icon.png';
+import InstagramIcon from '../../../media/instagram_icon.png';
 
-const Share = () => {
-  const shareUrl = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
-  const title = 'Rick Rolled!';
-
-  return (
-    <div>
-      <div className="some-network">
-        <FacebookShareButton
-          url={shareUrl}
-          quote={title}
+const Share = () => (
+  <div>
+    <div className="some-network">
+      <a
+        href="https://www.facebook.com/"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <img
+          src={FacebookIcon}
+          alt="Facebook Icon"
           className="some-network__share-button"
-        >
-          <FacebookIcon size={32} round />
-        </FacebookShareButton>
-      </div>
-      <div className="some-network">
-        <TwitterShareButton
-          url={shareUrl}
-          title={title}
-          className="some-network__share-button"
-        >
-          <TwitterIcon size={32} round />
-        </TwitterShareButton>
-      </div>
-      <div className="some-network">
-        <PinterestShareButton
-          className="some-network__share-button"
-        >
-          <PinterestIcon size={32} round />
-        </PinterestShareButton>
-      </div>
+        />
+      </a>
     </div>
-    // <div>hey there</div>
-  );
-};
+    <div className="some-network">
+      <a
+        href="https://twitter.com/home"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <img
+          src={TwitterIcon}
+          alt="Facebook Icon"
+
+          className="some-network__share-button"
+        />
+      </a>
+    </div>
+    <div className="some-network">
+      <a
+        href="https://www.pinterest.com/"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <img
+          src={PinterestIcon}
+          alt="Facebook Icon"
+          target="_blank"
+          className="some-network__share-button"
+        />
+      </a>
+    </div>
+    <div className="some-network">
+      <a
+        href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <img
+          src={InstagramIcon}
+          alt="Facebook Icon"
+          target="_blank"
+          className="some-network__share-button"
+        />
+      </a>
+    </div>
+  </div>
+);
 
 export default Share;

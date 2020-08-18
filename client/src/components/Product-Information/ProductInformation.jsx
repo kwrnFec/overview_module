@@ -1,13 +1,7 @@
+/* eslint-disable import/extensions */
 import React from 'react';
-import {
-  FacebookShareButton,
-  TwitterShareButton,
-  PinterestShareButton,
-  FacebookIcon,
-  TwitterIcon,
-  PinterestIcon,
-} from 'react-share';
 import Stars from './Stars.jsx';
+import Share from './Share.jsx';
 
 const ProductInformation = ({
   originalPrice,
@@ -21,39 +15,10 @@ const ProductInformation = ({
 
   return (
     <div>
-      <span className="stars-reviews reviews-share-inline">
-        <div>
-          <Stars reviewsList={reviewsList} />
-        </div>
-      </span>
-      {' '}
-      <span className="reviews-share-inline">
-        <div className="some-network">
-          <FacebookShareButton
-            url={shareUrl}
-            quote={title}
-            className="some-network__share-button"
-          >
-            <FacebookIcon size={32} round />
-          </FacebookShareButton>
-        </div>
-        <div className="some-network">
-          <TwitterShareButton
-            url={shareUrl}
-            title={title}
-            className="some-network__share-button"
-          >
-            <TwitterIcon size={32} round />
-          </TwitterShareButton>
-        </div>
-        <div className="some-network">
-          <PinterestShareButton
-            className="some-network__share-button"
-          >
-            <PinterestIcon size={32} round />
-          </PinterestShareButton>
-        </div>
-      </span>
+      <div>
+        <Stars reviewsList={reviewsList} />
+      </div>
+      <Share />
       <p className="product-category">{productCategory && productCategory.toUpperCase()}</p>
       <h1 className="product-name">{productName}</h1>
       {salePrice === '0' ? (
