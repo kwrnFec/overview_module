@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
   FacebookShareButton,
   TwitterShareButton,
@@ -6,8 +6,6 @@ import {
   FacebookIcon,
   TwitterIcon,
   PinterestIcon,
-  FacebookShareCount,
-  PinterestShareCount,
 } from 'react-share';
 import Stars from './Stars.jsx';
 
@@ -16,21 +14,17 @@ const ProductInformation = ({
   salePrice,
   productName,
   productCategory,
-  setDisplayedPrice,
   reviewsList
 }) => {
   const shareUrl = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
   const title = 'Rick Rolled!';
 
-  const setPrice = (price) => {
-    setDisplayedPrice(price);
-    return '$' + price;
-  };
-
   return (
     <div>
       <span className="stars-reviews reviews-share-inline">
-        <Stars reviewsList={reviewsList} />
+        <div>
+          <Stars reviewsList={reviewsList} />
+        </div>
       </span>
       {' '}
       <span className="reviews-share-inline">
@@ -64,12 +58,12 @@ const ProductInformation = ({
       <h1 className="product-name">{productName}</h1>
       {salePrice === '0' ? (
         <div>
-          <p className="display-price"> {setPrice(originalPrice)}</p>
+          <p className="display-price"> {'$' + originalPrice}</p>
         </div>
       ) : (
         <div>
           <span className="sale-price-block display-price">
-            {setPrice(salePrice)}
+            {'$' + salePrice}
           </span>
           {' '}
           <span className="sale-price-block" id="struck-price">

@@ -17,7 +17,7 @@ const App = () => {
   const [product, setProduct] = useState({});
   const [productStyles, setProductStyles] = useState([]);
   const [currentStyle, setCurrentStyle] = useState({});
-  const [productId, setProductId] = useState(4);
+  const [productId, setProductId] = useState(1);
   const [currentStyleIndex, setCurrentStyleIndex] = useState(0);
   const [currentStyleId, setCurrentStyleId] = useState(1);
   const [originalPrice, setOriginalPrice] = useState(null);
@@ -26,7 +26,6 @@ const App = () => {
   const [productCategory, setProductCategory] = useState(null);
   const [styleName, setStyleName] = useState(null);
   const [styleSkus, setStyleSku] = useState({});
-  const [displayedPrice, setDisplayedPrice] = useState(null);
   const [reviewsList, setReviewsList] = useState([]);
 
   useEffect(() => {
@@ -116,7 +115,6 @@ const App = () => {
                 productCategory={productCategory}
                 originalPrice={originalPrice}
                 salePrice={salePrice}
-                setDisplayedPrice={setDisplayedPrice}
               />
             </Col>
             <Col xs={6} className="style-selector">
@@ -133,7 +131,8 @@ const App = () => {
                 styleSkus={styleSkus}
                 productName={productName}
                 styleName={styleName}
-                displayedPrice={displayedPrice}
+                originalPrice={originalPrice}
+                salePrice={salePrice}
               />
             </Col>
           </Row>
