@@ -14,7 +14,7 @@ const Stars = ({ reviewsList }) => {
       total += currentReview.rating;
     }
     const averageRating = (total / reviewsList.length).toFixed(1);
-    setRating(parseInt(averageRating));
+    setRating(parseFloat(averageRating));
   };
 
   useEffect(() => {

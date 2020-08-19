@@ -9,35 +9,33 @@ const ProductInformation = ({
   productName,
   productCategory,
   reviewsList
-}) => {
-  const shareUrl = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
-  const title = 'Rick Rolled!';
-
-  return (
+}) => (
+  <div>
     <div>
-      <div>
-        <Stars reviewsList={reviewsList} />
-      </div>
-      <Share />
-      <p className="product-category">{productCategory && productCategory.toUpperCase()}</p>
-      <h1 className="product-name">{productName}</h1>
-      {salePrice === '0' ? (
-        <div>
-          <p className="display-price"> {'$' + originalPrice}</p>
-        </div>
-      ) : (
-        <div>
-          <span className="sale-price-block display-price">
-            {'$' + salePrice}
-          </span>
-          {' '}
-          <span className="sale-price-block" id="struck-price">
-            {'$' + originalPrice}
-          </span>
-        </div>
-      )}
+      <Stars reviewsList={reviewsList} />
     </div>
-  );
-};
+    <Share />
+    <p className="product-category">{productCategory && productCategory.toUpperCase()}</p>
+    <h1 className="product-name">{productName}</h1>
+    {salePrice === '0' ? (
+      <div>
+        <p className="display-price">
+          {' '}
+          {`$${originalPrice}`}
+        </p>
+      </div>
+    ) : (
+      <div>
+        <span className="sale-price-block display-price">
+          {`$${salePrice}`}
+        </span>
+        {' '}
+        <span className="sale-price-block" id="struck-price">
+          {`$${originalPrice}`}
+        </span>
+      </div>
+    )}
+  </div>
+);
 
 export default ProductInformation;
