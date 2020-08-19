@@ -57,6 +57,18 @@ app.post('/cart/', (req, res) => {
     .catch((err) => res.status(500).send(err));
 });
 
+// REVIEWS
+app.get('/reviews/:product_id/list', (req, res) => {
+  axios.get(`${url}/reviews/${req.params.product_id}/list`, {
+    params: {
+      count: 20,
+      sort: 'newest',
+    },
+  })
+    .then((response) => res.status(200).send(response.data))
+    .catch((err) => res.status(500).send(err));
+});
+
 app.listen(port, () => {
   // eslint-disable-next-line no-console
   console.log(`Example app listening at http://localhost:${port}`);

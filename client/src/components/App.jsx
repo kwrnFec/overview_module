@@ -17,7 +17,7 @@ const App = () => {
   const [product, setProduct] = useState({});
   const [productStyles, setProductStyles] = useState([]);
   const [currentStyle, setCurrentStyle] = useState({});
-  const [productId, setProductId] = useState(1);
+  const [productId, setProductId] = useState(4);
   const [currentStyleIndex, setCurrentStyleIndex] = useState(0);
   const [currentStyleId, setCurrentStyleId] = useState(1);
   const [originalPrice, setOriginalPrice] = useState(null);
@@ -26,7 +26,7 @@ const App = () => {
   const [productCategory, setProductCategory] = useState(null);
   const [styleName, setStyleName] = useState(null);
   const [styleSkus, setStyleSku] = useState({});
-  const [displayedPrice, setDisplayedPrice] = useState(null);
+  const [reviewsList, setReviewsList] = useState([]);
 
   useEffect(() => {
     Axios.get(`http://52.26.193.201:3000/products/${productId}/`)
@@ -64,6 +64,19 @@ const App = () => {
       });
   }, [productId, currentStyleIndex]);
 
+  useEffect(() => {
+    Axios.get(`http://52.26.193.201:3000/reviews/${productId}/list`)
+      .then((res) => {
+        setIsLoaded(true);
+        console.log('reviewsList: ', res.data.results);
+        setReviewsList(res.data.results);
+      },
+      (err) => {
+        setIsLoaded(true);
+        setErr(err);
+      });
+  }, [productId]);
+
   if (err) {
     return (
       <div>
@@ -97,11 +110,11 @@ const App = () => {
           <Row>
             <Col xs={12} className="product-information">
               <ProductInformation
+                reviewsList={reviewsList}
                 productName={productName}
                 productCategory={productCategory}
                 originalPrice={originalPrice}
                 salePrice={salePrice}
-                setDisplayedPrice={setDisplayedPrice}
               />
             </Col>
             <Col xs={6} className="style-selector">
@@ -118,13 +131,14 @@ const App = () => {
                 styleSkus={styleSkus}
                 productName={productName}
                 styleName={styleName}
-                displayedPrice={displayedPrice}
+                originalPrice={originalPrice}
+                salePrice={salePrice}
               />
             </Col>
           </Row>
         </Col>
       </Row>
-      <Row xs={3} sm={3} md={3} lg={3}>
+      <Row>
         <Col className="product-description">
           {product && (
             <ProductDescription product={product} />
