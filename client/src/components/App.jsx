@@ -17,7 +17,7 @@ const App = () => {
   const [product, setProduct] = useState({});
   const [productStyles, setProductStyles] = useState([]);
   const [currentStyle, setCurrentStyle] = useState({});
-  const [productId, setProductId] = useState(4);
+  const [productId, setProductId] = useState(8);
   const [currentStyleIndex, setCurrentStyleIndex] = useState(0);
   const [currentStyleId, setCurrentStyleId] = useState(1);
   const [originalPrice, setOriginalPrice] = useState(null);
@@ -27,9 +27,10 @@ const App = () => {
   const [styleName, setStyleName] = useState(null);
   const [styleSkus, setStyleSku] = useState({});
   const [reviewsList, setReviewsList] = useState([]);
+  const prefix = '/ov';
 
   useEffect(() => {
-    Axios.get(`http://52.26.193.201:3000/products/${productId}/`)
+    Axios.get(`${prefix}/products/${productId}/`)
     // Axios.get(`http://18.224.200.47/products/${productId}/`)
       .then((res) => {
         console.log('product: ', res.data);
@@ -45,7 +46,7 @@ const App = () => {
   }, [productId]);
 
   useEffect(() => {
-    Axios.get(`http://52.26.193.201:3000/products/${productId}/styles`)
+    Axios.get(`${prefix}/products/${productId}/styles`)
     // Axios.get(`http://18.224.200.47/products/${productId}/styles`)
       .then((res) => {
         setIsLoaded(true);
@@ -65,7 +66,7 @@ const App = () => {
   }, [productId, currentStyleIndex]);
 
   useEffect(() => {
-    Axios.get(`http://52.26.193.201:3000/reviews/${productId}/list`)
+    Axios.get(`${prefix}/reviews/${productId}/list`)
       .then((res) => {
         setIsLoaded(true);
         console.log('reviewsList: ', res.data.results);

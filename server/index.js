@@ -16,39 +16,41 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '/../client/dist')));
 app.use(cors());
 
+const prefix = '/ov';
+
 // PRODUCTS
-app.get('/products/list', (req, res) => {
+app.get(`${prefix}/products/list`, (req, res) => {
   axios.get(`${url}/products/list`)
     .then((response) => res.status(200).send(response.data))
     .catch((err) => res.status(500).send(err));
 });
 
-app.get('/products/:product_id/', (req, res) => {
+app.get(`${prefix}/products/:product_id/`, (req, res) => {
   axios.get(`${url}/products/${req.params.product_id}`)
     .then((response) => res.status(200).send(response.data))
     .catch((err) => res.status(500).send(err));
 });
 
-app.get('/products/:product_id/styles', (req, res) => {
+app.get(`${prefix}/products/:product_id/styles`, (req, res) => {
   axios.get(`${url}/products/${req.params.product_id}/styles`)
     .then((response) => res.status(200).send(response.data))
     .catch((err) => res.status(500).send(err));
 });
 
-app.get('/products/:product_id/related', (req, res) => {
+app.get(`${prefix}/products/:product_id/related`, (req, res) => {
   axios.get(`${url}/products/${req.params.product_id}/related`)
     .then((response) => res.status(200).send(response.data))
     .catch((err) => res.status(500).send(err));
 });
 
 // CART
-app.get('/cart/:user_session', (req, res) => {
+app.get(`${prefix}/cart/:user_session`, (req, res) => {
   axios.get(`${url}/cart/${req.params.user_session}`)
     .then((response) => res.status(200).send(response.data))
     .catch((err) => res.status(500).send(err));
 });
 
-app.post('/cart/', (req, res) => {
+app.post(`${prefix}/cart/`, (req, res) => {
   axios.post(`${url}/cart/`, {
     user_session: req.params.user_session,
     product_id: req.params.product_id,
@@ -58,7 +60,7 @@ app.post('/cart/', (req, res) => {
 });
 
 // REVIEWS
-app.get('/reviews/:product_id/list', (req, res) => {
+app.get(`${prefix}/reviews/:product_id/list`, (req, res) => {
   axios.get(`${url}/reviews/${req.params.product_id}/list`, {
     params: {
       count: 20,
