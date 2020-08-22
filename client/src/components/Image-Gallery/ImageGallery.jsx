@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
-import Axios from 'axios';
-import { render } from 'enzyme';
 
 const ControlledCarousel = ({ currentStyle }) => {
   const [index, setIndex] = useState(0);

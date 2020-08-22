@@ -5,10 +5,10 @@ const axios = require('axios').default;
 const app = express();
 const bodyParser = require('body-parser');
 const path = require('path');
-const { response } = require('express');
 
 const port = 3333;
 const url = 'http://52.26.193.201:3000';
+const prefix = '/ov';
 // const url = 'http://18.224.200.47/';
 
 app.use(bodyParser.json());
@@ -16,7 +16,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '/../client/dist')));
 app.use(cors());
 
-const prefix = '/ov';
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+});
+
+// SEND bundle.js FILE
+app.get('/ov', (req, res) => {
+  res.sendFile(path.join(__dirname, '/../client/dist/bundle.js'));
+});
 
 // PRODUCTS
 app.get(`${prefix}/products/list`, (req, res) => {
