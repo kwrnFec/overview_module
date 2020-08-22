@@ -16,11 +16,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '/../client/dist')));
 app.use(cors());
 
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  next();
-});
-
 // SEND bundle.js FILE
 app.get('/ov', (req, res) => {
   res.sendFile(path.join(__dirname, '/../client/dist/bundle.js'));

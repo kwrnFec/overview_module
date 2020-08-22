@@ -1,8 +1,4 @@
 import React from 'react';
-import FacebookIcon from '../../../media/facebook_icon.png';
-import TwitterIcon from '../../../media/twitter_icon.png';
-import PinterestIcon from '../../../media/pinterest_icon.png';
-import InstagramIcon from '../../../media/instagram_icon.png';
 
 const Share = () => (
   <div>
@@ -13,7 +9,7 @@ const Share = () => (
         rel="noreferrer"
       >
         <img
-          src={FacebookIcon}
+          src="https://images-overview1.s3-us-west-2.amazonaws.com/facebook.png"
           alt="Facebook Icon"
           className="some-network__share-button"
         />
@@ -26,9 +22,8 @@ const Share = () => (
         rel="noreferrer"
       >
         <img
-          src={TwitterIcon}
-          alt="Facebook Icon"
-
+          src="https://images-overview1.s3-us-west-2.amazonaws.com/twitter.png"
+          alt="Twitter Icon"
           className="some-network__share-button"
         />
       </a>
@@ -40,8 +35,8 @@ const Share = () => (
         rel="noreferrer"
       >
         <img
-          src={PinterestIcon}
-          alt="Facebook Icon"
+          src="https://images-overview1.s3-us-west-2.amazonaws.com/pinterest.png"
+          alt="Pinterest Icon"
           target="_blank"
           className="some-network__share-button"
         />
@@ -54,9 +49,8 @@ const Share = () => (
         rel="noreferrer"
       >
         <img
-          src={InstagramIcon}
-          alt="Facebook Icon"
-          target="_blank"
+          src="https://images-overview1.s3-us-west-2.amazonaws.com/insta.png"
+          alt="Instagram Icon"
           className="some-network__share-button"
         />
       </a>
