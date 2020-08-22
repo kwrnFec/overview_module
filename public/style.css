@@ -40,33 +40,18 @@
 }
 
 .carousel-control-prev {
-  margin-top: 50px;
   margin-left: 125px;
-}
-
-.carousel-control-next {
-  margin-top: 50px;
-}
-
-#zoom-icon {
-  /* margin-top: 2em;
-  margin-left: 2em; */
-  height: 2%;
-  height: 2%;
-  top: 30px;
-  right: 30px;
-  position: absolute;
 }
 
 /* THUMBNAILS */
 .thumbnails-container {
-  height: 90%;
+  height: 82%;
   width: 12%;
   position: absolute;
   top: 0;
   left: 0;
   z-index: 9;
-  margin-top: 2em;
+  margin-top: 4em;
   margin-left: 2em;
 }
 
