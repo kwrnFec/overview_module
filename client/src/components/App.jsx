@@ -17,7 +17,7 @@ const App = () => {
   const [product, setProduct] = useState({});
   const [productStyles, setProductStyles] = useState([]);
   const [currentStyle, setCurrentStyle] = useState({});
-  const [productId, setProductId] = useState(8);
+  const [productId, setProductId] = useState(1);
   const [currentStyleIndex, setCurrentStyleIndex] = useState(0);
   const [currentStyleId, setCurrentStyleId] = useState(1);
   const [originalPrice, setOriginalPrice] = useState(null);
@@ -104,7 +104,7 @@ const App = () => {
         </Row>
       </Container>
       <Row>
-        <Col className="image-gallery">
+        <Col>
           <ControlledCarousel currentStyle={currentStyle} />
         </Col>
         <Col>

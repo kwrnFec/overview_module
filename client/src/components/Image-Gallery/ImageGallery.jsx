@@ -3,7 +3,7 @@ import Carousel from 'react-bootstrap/Carousel';
 import Axios from 'axios';
 import { render } from 'enzyme';
 
-// import Crop from '../../../media/Crop.png';
+import Crop from '../../../media/Crop.png';
 
 const ControlledCarousel = ({ currentStyle }) => {
   const [index, setIndex] = useState(0);
@@ -34,6 +34,7 @@ const ControlledCarousel = ({ currentStyle }) => {
         indicators={false}
         activeIndex={index}
         onSelect={handleSelect}
+        className="image-gallery"
       >
         {currentStyle.photos && (
           currentStyle.photos.map((photo) => (
@@ -47,13 +48,13 @@ const ControlledCarousel = ({ currentStyle }) => {
           ))
         )}
       </Carousel>
-      {/* <button type="submit">
+      <button type="submit">
         <img
           id="zoom-icon"
           src={Crop}
           alt="zoom"
         />
-      </button> */}
+      </button>
 
       <div className="thumbnails-container">
         <div>{renderThumbnails()}</div>
