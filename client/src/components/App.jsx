@@ -17,7 +17,7 @@ const App = () => {
   const [product, setProduct] = useState({});
   const [productStyles, setProductStyles] = useState([]);
   const [currentStyle, setCurrentStyle] = useState({});
-  const [productId, setProductId] = useState(8);
+  const [productId, setProductId] = useState(1);
   const [currentStyleIndex, setCurrentStyleIndex] = useState(0);
   const [currentStyleId, setCurrentStyleId] = useState(1);
   const [originalPrice, setOriginalPrice] = useState(null);
@@ -88,7 +88,7 @@ const App = () => {
   } if (!isLoaded) {
     return <div>Loading...</div>;
   } return (
-    <Container fluid className="full-container">
+    <Container fluid>
       <Navibar />
       <Container fluid className="announcement-message">
         <Row>
@@ -103,6 +103,7 @@ const App = () => {
           </Col>
         </Row>
       </Container>
+      <Container fluid className="full-container">
       <Row>
         <Col className="image-gallery">
           <ControlledCarousel currentStyle={currentStyle} />
@@ -146,6 +147,7 @@ const App = () => {
           )}
         </Col>
       </Row>
+      </Container>
     </Container>
   );
 };
