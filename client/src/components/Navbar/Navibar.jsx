@@ -11,13 +11,13 @@ import {
 const Navibar = () => (
   <Navbar className="nav-bar navbar-container">
     <Navbar.Brand href="#home">
-      <img
+      {/* <img
         src="https://i.imgur.com/NZYErNZ.png"
         width="200"
         height="60"
         className="d-inline-block align-top logo"
         alt=""
-      />
+      /> */}
       {/* GREENFIELD */}
     </Navbar.Brand>
     <Nav className="mr-auto" />
