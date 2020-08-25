@@ -14,19 +14,22 @@ const ProductDescription = ({ product }) => (
         </Row>
       </Col>
       <Col xs={4} className="features-col">
-        {
-          product.features && (
-            product.features.map((feature) => (
-              <div>
-                <span>
-                  <CheckIcon className="feature-tick" fontSize="medium" />
-                </span>
-                <span id="feature-feature">{`${feature.feature}:`}</span>
-                <span id="feature-value">{feature.value}</span>
-              </div>
-            ))
-          )
-        }
+        {product.features &&
+          product.features.map((feature) => (
+            <div>
+              <span>
+                <CheckIcon className="feature-tick" fontSize="medium" />
+              </span>
+              <span id="feature-feature">
+                {feature.value === 'null'
+                  ? feature.feature
+                  : `${feature.feature}:`}
+              </span>
+              <span id="feature-value">
+                {feature.value === 'null' ? '' : feature.value}
+              </span>
+            </div>
+          ))}
       </Col>
     </Row>
   </Container>
