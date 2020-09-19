@@ -5,8 +5,6 @@ Elysium Solutions is an apparel shopping app with a focus on modern and accessib
 ![product-overview](https://github.com/kwrnFec/overview_module/blob/master/client/src/media/Screen%20Shot%202020-09-18%20at%2021.43.26.png)
 
 This app was built from the ground up and is the product detail / overview module of an entire single page e-commerce web application in a service oriented / microservices architecture.
-
- named Elysium Solutions.  
  
  # Demo Video
 
