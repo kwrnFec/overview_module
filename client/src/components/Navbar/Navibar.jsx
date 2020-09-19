@@ -9,17 +9,30 @@ import {
 } from 'react-bootstrap';
 
 const Navibar = () => (
-  <Navbar className="nav-bar navbar-container">
+  <Navbar bg="dark" variant="dark" className="nav-bar navbar-container">
     <Navbar.Brand href="#home">
-      {/* <img
-        src="https://i.imgur.com/NZYErNZ.png"
-        width="200"
-        height="60"
+      <img
+        src="https://images-overview1.s3-us-west-2.amazonaws.com/elysium-cube.svg"
+        width="77"
+        height="77"
         className="d-inline-block align-top logo"
         alt=""
-      /> */}
-      {/* GREENFIELD */}
+      />
     </Navbar.Brand>
+    <span>
+      <Navbar.Brand href="#home">
+        <span>
+          <h3 className="nav-title">
+            E l y s i u m
+          </h3>
+        </span>
+        <span>
+          <h3 className="nav-title">
+            S o l u t i o n s
+          </h3>
+        </span>
+      </Navbar.Brand>
+    </span>
     <Nav className="mr-auto" />
     <Form inline>
       <FormControl type="text" placeholder="Search" className="mr-sm-2" />
