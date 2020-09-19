@@ -3,7 +3,9 @@
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 
-import { Container, Row, Col } from 'react-bootstrap';
+import {
+  Container, Row, Col, Spinner,
+} from 'react-bootstrap';
 import Navibar from './Navbar/Navibar.jsx';
 import ControlledCarousel from './Image-Gallery/ImageGallery.jsx';
 import ProductDescription from './Product-Description/ProductDescription.jsx';
@@ -17,7 +19,7 @@ const App = () => {
   const [product, setProduct] = useState({});
   const [productStyles, setProductStyles] = useState([]);
   const [currentStyle, setCurrentStyle] = useState({});
-  const [productId, setProductId] = useState(1);
+  const [productId, setProductId] = useState(8);
   const [currentStyleIndex, setCurrentStyleIndex] = useState(0);
   const [currentStyleId, setCurrentStyleId] = useState(1);
   const [originalPrice, setOriginalPrice] = useState(null);
@@ -86,7 +88,12 @@ const App = () => {
       </div>
     );
   } if (!isLoaded) {
-    return <div>Loading...</div>;
+    return (
+      <div className="spinner">
+        <Spinner animation="border" role="status" />
+        <div>Loading...</div>
+      </div>
+    );
   } return (
     <Container fluid className="full-container">
       <Navibar />
