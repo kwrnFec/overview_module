@@ -8,18 +8,35 @@ This app was built from the ground up and is the product detail / overview modul
 
  named Elysium Solutions.  
  
- # Image Gallery
+ # Demo Video
+
+[![Watch the video](https://github.com/kwrnFec/overview_module/blob/master/client/src/media/Screen%20Shot%202020-09-18%20at%2020.43.49.png)](https://youtu.be/4b563qowrAI)
+ 
+ ## Image Gallery
  
  * Controlled Carousel
  * Dynamically responsive thumbnails
  * Responsive left and right buttons
  
  ![image-gallery](https://github.com/kwrnFec/overview_module/blob/master/client/src/media/2020-09-18%2022.25.24.gif)
-
-
-## Demo Video
-
-[![Watch the video](https://github.com/kwrnFec/overview_module/blob/master/client/src/media/Screen%20Shot%202020-09-18%20at%2020.43.49.png)](https://youtu.be/4b563qowrAI)
+ 
+ ## Product Information
+ 
+ * Star Rating
+ * Product Category
+ * Product Title
+ * Default Price (and Sale Price if product is on sale)
+ * Social Media Share Icons
+ * Style Selector
+ * Size Selector
+ * Quantity Selector
+ * Shopping Cart
+ 
+ ![product-detail](https://github.com/kwrnFec/overview_module/blob/master/client/src/media/product-information-demo.gif) 
+ 
+ ## Business Requirements Mockup
+ 
+ ![mock-up](https://github.com/kwrnFec/overview_module/blob/master/client/src/media/Screen%20Shot%202020-09-18%20at%2022.58.32.png)
 
 ## Getting Started
 
@@ -36,12 +53,12 @@ Next, fork the repo to your Github.
 Next, access the demo site by cloning the Github repository:
 
 ```
-$ git clone https://github.com/HonorioTaveras/dirtbag-companion.git
+$ git clone https://github.com/kwrnFec/overview_module.git
 ```
 
 ### Installing
 
-Navigate inside the directory './cryptocurrency-charting-tool' and run the following commands:
+Navigate inside the directory './overview_module' and run the following commands:
 
 ```
 $ npm i
@@ -54,24 +71,28 @@ $ npm run start
 $ npm run react-dev
 ```
 
-In your browser, open up a window or tab to http://localhost:4444/
+In your browser, open up a window or tab to http://localhost:4567/
 
 ## Built With
 
-* [MongoDB](https://www.mongodb.com/) w/ [MongooseJS](https://mongoosejs.com/)
 * [Express](https://expressjs.com/)
 * [React](https://reactjs.org/)
 * [Node.js](https://nodejs.org/en/)
+* [React-Bootstrap](https://react-bootstrap.github.io/)
 
-## Deployed with
+## Containerized and Deployed with
 
-* [Heroku](https://www.heroku.com/home)
+* [Docker](https://hub.docker.com/)
+* [Amazon Web Services](https://aws.amazon.com/?nc2=h_lg) using an EC2 instance
 
-## Authors
+## Author
 
 * **Honorio Taveras** - *Initial work* - [HonorioTaveras](https://github.com/HonorioTaveras)
 
+## Related Projects
 
-## Acknowledgments
-
-* Hats off to [Mountain Project](https://www.mountainproject.com/) for the inspiration and for the information for my API
+  - https://github.com/kwrnFec/honorio_proxy
+  - https://github.com/kwrnFec/shared_resources
+  - https://github.com/kwrnFec/related_items_module
+  - https://github.com/kwrnFec/q_and_a_module
+  - https://github.com/kwrnFec/ratings_and_reviews_module
