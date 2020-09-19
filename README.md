@@ -3,7 +3,7 @@
 
 ## Demo Video
 
-[![Watch the video](Screen Shot 2020-09-18 at 20.44.15.png)](https://youtu.be/4b563qowrAI)
+[![Watch the video](https://images-overview1.s3-us-west-2.amazonaws.com/Screen+Shot+2020-09-18+at+20.44.15.png)](https://youtu.be/4b563qowrAI)
 
 ## Getting Started
 
