@@ -11,7 +11,7 @@ This app was built from the ground up and is the product detail / overview modul
 
 ## Demo Video
 
-[![Watch the video](https://images-overview1.s3-us-west-2.amazonaws.com/Screen+Shot+2020-09-18+at+20.44.15.png)](https://youtu.be/4b563qowrAI)
+[![Watch the video](https://github.com/kwrnFec/overview_module/blob/master/client/src/media/Screen%20Shot%202020-09-18%20at%2020.43.49.png)](https://youtu.be/4b563qowrAI)
 
 ## Getting Started
 
