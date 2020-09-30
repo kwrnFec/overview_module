@@ -1,9 +1,14 @@
+/* eslint-disable no-alert */
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable no-nested-ternary */
 import React, { useState } from 'react';
-import { Container, Row, Col, DropdownButton, Dropdown, Button, Modal, Alert } from 'react-bootstrap';
+import {
+  Container, Row, Col, DropdownButton, Dropdown, Button, Modal, Alert,
+} from 'react-bootstrap';
 
-const ShoppingCart = ({ styleSkus, productName, styleName, originalPrice, salePrice }) => {
+const ShoppingCart = ({
+  styleSkus, productName, styleName, originalPrice, salePrice,
+}) => {
   const [cart, setCart] = useState({});
   const [selectedSize, setSelectedSize] = useState(null);
   const [selectedQuantity, setSelectedQuantity] = useState(0);

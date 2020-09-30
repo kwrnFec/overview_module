@@ -14,7 +14,7 @@ COPY . /ovModule
 RUN npm install
 
 # What port will the container talk to the outside world with once created?
-EXPOSE 3333
+EXPOSE 4567
 
 # How do you start your app?
 CMD [ "npm", "run", "start" ]
