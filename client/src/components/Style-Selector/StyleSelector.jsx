@@ -22,8 +22,9 @@ export default function StyleSelector({
       </div>
       <Row sm={4} md={4} lg={4} xl={4}>
         {productStyles
-          && productStyles.map((style, i) => (
-            i <= 7 && (
+          && React.Children.toArray(
+            productStyles.map(
+              (style, i) => i <= 7 && (
               <Col className="selector-image-col">
                 <Image
                   onClick={() => {
@@ -36,8 +37,9 @@ export default function StyleSelector({
                 <div className="selector-checkmark" />
                 )}
               </Col>
-            )
-          ))}
+              ),
+            ),
+          )}
       </Row>
     </Container>
   );

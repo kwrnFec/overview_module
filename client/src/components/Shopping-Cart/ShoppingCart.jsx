@@ -3,11 +3,22 @@
 /* eslint-disable no-nested-ternary */
 import React, { useState } from 'react';
 import {
-  Container, Row, Col, DropdownButton, Dropdown, Button, Modal, Alert,
+  Container,
+  Row,
+  Col,
+  DropdownButton,
+  Dropdown,
+  Button,
+  Modal,
+  Alert,
 } from 'react-bootstrap';
 
 const ShoppingCart = ({
-  styleSkus, productName, styleName, originalPrice, salePrice,
+  styleSkus,
+  productName,
+  styleName,
+  originalPrice,
+  salePrice,
 }) => {
   const [cart, setCart] = useState({});
   const [selectedSize, setSelectedSize] = useState(null);
@@ -20,7 +31,7 @@ const ShoppingCart = ({
 
   let inStock = true;
   for (const sku in styleSkus) {
-    if ((styleSkus[sku] > 0 in styleSkus) || sku === 'null') {
+    if (styleSkus[sku] > 0 in styleSkus || sku === 'null') {
       inStock = false;
     }
   }
@@ -36,21 +47,17 @@ const ShoppingCart = ({
     quantityList.push(i + 1);
   }
 
-  const selectSizeTitle = () => (
-    selectedSize || (inStock ? 'SELECT SIZE' : 'OUT OF STOCK')
-  );
+  const selectSizeTitle = () => selectedSize || (inStock ? 'SELECT SIZE' : 'OUT OF STOCK');
 
-  const selectQuantityTitle = () => (
-    quantityList.length === 0
-      ? '-'
-      : !qtyIdx
-        ? 1
-        : qtyIdx > quantityList.length
-          ? quantityList[quantityList.length - 1]
-          : qtyIdx < quantityList.length
-            ? qtyIdx
-            : qtyIdx
-  );
+  const selectQuantityTitle = () => (quantityList.length === 0
+    ? '-'
+    : !qtyIdx
+      ? 1
+      : qtyIdx > quantityList.length
+        ? quantityList[quantityList.length - 1]
+        : qtyIdx < quantityList.length
+          ? qtyIdx
+          : qtyIdx);
 
   const displayedPrice = salePrice === '0' ? originalPrice : salePrice;
 
@@ -77,21 +84,23 @@ const ShoppingCart = ({
   //   console.log('cartItem: ', cartItem);
   // }
 
-  const handleSelectSize = () => (
-    Object.entries(styleSkus).map((size, quantity) => quantity > 0 && (
-      <Dropdown.Item onClick={() => clickedAndSelectSku(size[0], quantity)}>
-        {size[0]}
-      </Dropdown.Item>
-    ))
+  const handleSelectSize = () => React.Children.toArray(
+    Object.entries(styleSkus).map(
+      (size, quantity) => quantity > 0 && (
+        <Dropdown.Item
+          onClick={() => clickedAndSelectSku(size[0], quantity)}
+        >
+          {size[0]}
+        </Dropdown.Item>
+      ),
+    ),
   );
 
-  const handleSelectQuantity = () => (
-    quantityList.map((quantity, i) => (
-      <Dropdown.Item eventKey={i} onSelect={handleQuantitySelect}>
-        {quantity}
-      </Dropdown.Item>
-    ))
-  );
+  const handleSelectQuantity = () => quantityList.map((quantity, i) => (
+    <Dropdown.Item eventKey={i} onSelect={handleQuantitySelect}>
+      {quantity}
+    </Dropdown.Item>
+  ));
 
   const handleShoppingCart = () => {
     if (!cartItem.size) {

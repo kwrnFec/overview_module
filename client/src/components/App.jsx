@@ -33,43 +33,45 @@ const App = () => {
 
   useEffect(() => {
     Axios.get(`${prefix}/products/${productId}/`)
-    // Axios.get(`http://18.224.200.47/products/${productId}/`)
-      .then((res) => {
-        console.log('product: ', res.data);
-        setIsLoaded(true);
-        setProduct(res.data);
-        setProductName(res.data.name);
-        setProductCategory(res.data.category);
-      },
-      (err) => {
-        setIsLoaded(true);
-        setErr(err);
-      });
+      // Axios.get(`http://18.224.200.47/products/${productId}/`)
+      .then(
+        (res) => {
+          console.log('product: ', res.data);
+          setIsLoaded(true);
+          setProduct(res.data);
+          setProductName(res.data.name);
+          setProductCategory(res.data.category);
+        },
+        (err) => {
+          setIsLoaded(true);
+          setErr(err);
+        },
+      );
   }, [productId]);
 
   useEffect(() => {
     Axios.get(`${prefix}/products/${productId}/styles`)
-    // Axios.get(`http://18.224.200.47/products/${productId}/styles`)
-      .then((res) => {
-        setIsLoaded(true);
-        console.log('currentStyle: ', res.data.results[currentStyleIndex]);
-        setProductStyles(res.data.results);
-        setCurrentStyle(res.data.results[currentStyleIndex]);
-        setCurrentStyleId(res.data.results[currentStyleIndex].style_id);
-        setStyleName(res.data.results[currentStyleIndex].name);
-        setOriginalPrice(res.data.results[currentStyleIndex].original_price);
-        setSalePrice(res.data.results[currentStyleIndex].sale_price);
-        setStyleSku(res.data.results[currentStyleIndex].skus);
-      },
-      (err) => {
-        setIsLoaded(true);
-        setErr(err);
-      });
-  }, [productId, currentStyleIndex]);
+      // Axios.get(`http://18.224.200.47/products/${productId}/styles`)
+      .then(
+        (res) => {
+          setIsLoaded(true);
+          console.log('currentStyle: ', res.data.results[currentStyleIndex]);
+          setProductStyles(res.data.results);
+          setCurrentStyle(res.data.results[currentStyleIndex]);
+          setCurrentStyleId(res.data.results[currentStyleIndex].style_id);
+          setStyleName(res.data.results[currentStyleIndex].name);
+          setOriginalPrice(res.data.results[currentStyleIndex].original_price);
+          setSalePrice(res.data.results[currentStyleIndex].sale_price);
+          setStyleSku(res.data.results[currentStyleIndex].skus);
+        },
+        (err) => {
+          setIsLoaded(true);
+          setErr(err);
+        },
+      );
 
-  useEffect(() => {
-    Axios.get(`${prefix}/reviews/${productId}/list`)
-      .then((res) => {
+    Axios.get(`${prefix}/reviews/${productId}/list`).then(
+      (res) => {
         setIsLoaded(true);
         console.log('reviewsList: ', res.data.results);
         setReviewsList(res.data.results);
@@ -77,8 +79,9 @@ const App = () => {
       (err) => {
         setIsLoaded(true);
         setErr(err);
-      });
-  }, [productId]);
+      },
+    );
+  }, [productId, currentStyleIndex]);
 
   if (err) {
     return (
@@ -87,14 +90,16 @@ const App = () => {
         {err.message}
       </div>
     );
-  } if (!isLoaded) {
+  }
+  if (!isLoaded) {
     return (
       <div className="spinner">
         <Spinner animation="border" role="status" />
         <div>Loading...</div>
       </div>
     );
-  } return (
+  }
+  return (
     <Container fluid className="full-container">
       <Navibar />
       <Container fluid className="announcement-message">
@@ -148,9 +153,7 @@ const App = () => {
       </Row>
       <Row>
         <Col className="product-description">
-          {product && (
-            <ProductDescription product={product} />
-          )}
+          {product && <ProductDescription product={product} />}
         </Col>
       </Row>
     </Container>
